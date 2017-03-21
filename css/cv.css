@@ -29,7 +29,7 @@ img {
 }
 
 ol {
-    -webkit-margin-before: 0px;
+    -webkit-margin-before: 0;
     -webkit-padding-start: 15px
 }
 
@@ -344,7 +344,7 @@ ol {
 }
 
 .eng td, .eng .txt3, .eng .fbox strong {
-    font-family: "Arial"
+    font-family: "Arial", serif
 }
 
 .eng .txt1, .eng .rtbox, .eng .phd {
