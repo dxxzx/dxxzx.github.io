@@ -1,6 +1,17 @@
+---
+title: "adjust window edge in amlogic android system with u-boot bootloader"
+date: 2017-09-12T09:15:11+08:00
+draft: true
+tags: [u-boot,bootloader,screen edge,resolution]
+topics: []
+description: ""
+---
+
+
 # configure window edge
 ## Related files
 1. include/configs/gxl_p211_v1.h, line 145,
+
 ```c
 #define CONFIG_EXTRA_ENV_SETTINGS \
         "firstboot=1\0"\
@@ -44,11 +55,15 @@
         "display_bpp=16\0" \
         ...
 ```
-As you see, variables related to window edge are defined in this file.
+    
+As you see, variables related to window edge are defined in this file. Every variables will be add prefix `ubootenv.var`, finally, it look like this: `ubootenv.var.uimode=1080p`.
+
 2. build/include/config.h, line 4,`#include <configs/gxl_p211_v1.h>`
 
 This file include the file include/configs/gxl_p211_v1.h, make the macro CONFIG_EXTRA_ENV_SETTINGS visible for other files.
-3. include/env_default.h, line 109,
+
+3. include/env_default.h, line 109，
+
 ```c
 #ifdef  CONFIG_ENV_VARS_UBOOT_CONFIG                        
     "arch="     CONFIG_SYS_ARCH         "\0"                
@@ -72,28 +87,28 @@ In this file, macro CONFIG_EXTRA_ENV_SETTINGS are included in macro CONFIG_ENV_V
 
 ## Make uboot
 we use predefined configuration file to make uboot
+
 ```sh
 cd ${UBOOT_SOURCE_DIRECTORY}                    # enter source directory
 make gxl_p211_v1_defconfig                      # prepare configuration file
 make -j16                                       # start make
 ```
-
 generated file are listed in direcotry fip
+
 - fip/u-boot.bin
-- fip/u-boot.bin.sd.bin   
+- fip/u-boot.bin.sd.bin
 - fip/u-boot.bin.usb.tpl
 - fip/u-boot.bin.usb.bl2
-- fip/gxl/u-boot.bin
-- fip/gxl/u-boot.bin.sd.bin   
-- fip/gxl/u-boot.bin.usb.tpl
-- fip/gxl/u-boot.bin.usb.bl2
+
+__Don't use a file named with encrypt__, those files are used in high secure version system but not signed with our signature.
+If high secure system are required, sign u-boot.bin and u-boot.bin.sd.bin with our signature.
 
 ## Using generated uboot to make android system
 
-To using generated uboot, just copy them to directory 'upgrade/1080p', or 'upgrade/720p' under device defination directory, like this:
+To using generated uboot, just copy them to directory 'upgrade/1080p', or 'upgrade/720p'(decide by the value of `uimode`) under device defination directory, like this:
 
 ```sh
-cp -v fip/gxl/u-boot.bin{,.sd.bin,.usb.bl2,.usb.tpl} ../device/amlogic/p201_iptv/upgrade/1080p
+cp -v fip/u-boot.bin{,.sd.bin,.usb.bl2,.usb.tpl} ../device/amlogic/p201_iptv/upgrade/1080p
 ```
 the particular destination directory was decide by file factory.mk under device defination directory.
 eg:
