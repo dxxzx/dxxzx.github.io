@@ -7,9 +7,46 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Tue, 12 Sep 2017 09:15:11 +0800</lastBuildDate>
     
 	<atom:link href="https://dxxzx.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bootloader</title>
+      <link>https://dxxzx.github.io/tags/bootloader/</link>
+      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/tags/bootloader/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Resolution</title>
+      <link>https://dxxzx.github.io/tags/resolution/</link>
+      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/tags/resolution/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Screen Edge</title>
+      <link>https://dxxzx.github.io/tags/screen-edge/</link>
+      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/tags/screen-edge/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>U Boot</title>
+      <link>https://dxxzx.github.io/tags/u-boot/</link>
+      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/tags/u-boot/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

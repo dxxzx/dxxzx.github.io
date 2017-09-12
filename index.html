@@ -253,6 +253,87 @@
 
 <div class="content">
   
+    <article>
+  <header>
+    <h2><a href="https://dxxzx.github.io/post/android_compilation_procedure/">understanding android compiling progress</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>12 Sep 2017, 09:21</time>
+  </div>
+
+  
+
+  
+
+  
+
+</div>
+
+  </header>
+
+  <p>
+   build/core/main.mk:108:include $(BUILD_SYSTEM)/config.mk build/core/config.mk:137:include $(BUILD_SYSTEM)/envsetup.mk build/core/config.mk:155:include $(board_config_mk) build/core/envsetup.mk:115:include $(BUILD_SYSTEM)/product_config.mk build/core/product_config.mk:179:include $(BUILD_SYSTEM)/product.mk build/core/product_config.mk:180:include $(BUILD_SYSTEM)/device.mk build/core/config.mk:45:SRC_TARGET_DIR := $(TOPDIR)build/target build/core/config.mk:139:# Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE) build/core/config.mk:145:$(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)/BoardConfig.mk \ build/core/product_config.mk:185:$(SRC_TARGET_DIR)/product/AndroidProducts.mk) build/core/product_config.mk:267:$(foreach runtime, $(product_runtimes), $(eval include $(SRC_TARGET_DIR)/product/$(runtime).mk)) build/core/product.mk:33:$(SRC_TARGET_DIR)/product/AndroidProducts.mk  
+  </p>
+
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://dxxzx.github.io/post/preconfigured_window_edge/">adjust window edge in amlogic android system with u-boot bootloader</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>12 Sep 2017, 09:15</time>
+  </div>
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/u-boot">u-boot</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/bootloader">bootloader</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/screen-edge">screen edge</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/resolution">resolution</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  configure window edge Related files  include/configs/gxl_p211_v1.h, line 145,  #define CONFIG_EXTRA_ENV_SETTINGS \ &quot;firstboot=1\0&quot;\ &quot;upgrade_step=0\0&quot;\ &quot;jtag=apee\0&quot;\ &quot;loadaddr=1080000\0&quot;\ &quot;outputmode=720p50hz\0&quot; \ &quot;hdmimode=720p50hz\0&quot; \ &quot;cvbsmode=576cvbs\0&quot; \ &quot;1080p_h=1037\0&quot; \ &quot;1080p_w=1843\0&quot; \ &quot;1080p_x=38\0&quot; \ &quot;1080p_y=21\0&quot; \ &quot;1080i_h=1037\0&quot; \ &quot;1080i_w=1843\0&quot; \ &quot;1080i_x=38\0&quot; \ &quot;1080i_y=21\0&quot; \ &quot;720p_h=691\0&quot; \ &quot;720p_w=1222\0&quot; \ &quot;720p_x=32\0&quot; \ &quot;720p_y=14\0&quot; \ &quot;576p_h=545\0&quot; \ &quot;576p_w=680\0&quot; \ &quot;576p_x=20\0&quot; \ &quot;576p_y=15\0&quot; \ &quot;576i_h=545\0&quot; \ &quot;576i_w=680\0&quot; \ &quot;576i_x=20\0&quot; \ &quot;576i_y=15\0&quot; \ &quot;480p_h=433\0&quot; \ &quot;480p_w=649\0&quot; \ &quot;480p_x=35\0&quot; \ &quot;480p_y=23\0&quot; \ &quot;480i_h=433\0&quot; \ &quot;480i_w=649\0&quot; \ &quot;480i_x=35\0&quot; \ &quot;480i_y=23\0&quot; \ &quot;uimode=1080p\0&quot; \ &quot;display_width=1920\0&quot; \ &quot;display_height=1080\0&quot; \ &quot;display_bpp=16\0&quot; \ .
+  </p>
+
+  
+  <footer>
+    <a href="https://dxxzx.github.io/post/preconfigured_window_edge/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
 
   
 

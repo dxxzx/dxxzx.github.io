@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dylan&#39;s blog</title>
-    <link>https://dxxzx.github.io/</link>
-    <description>Recent content on Dylan&#39;s blog</description>
+    <title>Resolution on Dylan&#39;s blog</title>
+    <link>https://dxxzx.github.io/tags/resolution/</link>
+    <description>Recent content in Resolution on Dylan&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 12 Sep 2017 09:21:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 12 Sep 2017 09:15:11 +0800</lastBuildDate>
     
-	<atom:link href="https://dxxzx.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dxxzx.github.io/tags/resolution/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>understanding android compiling progress</title>
-      <link>https://dxxzx.github.io/post/android_compilation_procedure/</link>
-      <pubDate>Tue, 12 Sep 2017 09:21:11 +0800</pubDate>
-      
-      <guid>https://dxxzx.github.io/post/android_compilation_procedure/</guid>
-      <description> build/core/main.mk:108:include $(BUILD_SYSTEM)/config.mk build/core/config.mk:137:include $(BUILD_SYSTEM)/envsetup.mk build/core/config.mk:155:include $(board_config_mk) build/core/envsetup.mk:115:include $(BUILD_SYSTEM)/product_config.mk build/core/product_config.mk:179:include $(BUILD_SYSTEM)/product.mk build/core/product_config.mk:180:include $(BUILD_SYSTEM)/device.mk build/core/config.mk:45:SRC_TARGET_DIR := $(TOPDIR)build/target build/core/config.mk:139:# Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE) build/core/config.mk:145:$(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)/BoardConfig.mk \ build/core/product_config.mk:185:$(SRC_TARGET_DIR)/product/AndroidProducts.mk) build/core/product_config.mk:267:$(foreach runtime, $(product_runtimes), $(eval include $(SRC_TARGET_DIR)/product/$(runtime).mk)) build/core/product.mk:33:$(SRC_TARGET_DIR)/product/AndroidProducts.mk  </description>
-    </item>
     
     <item>
       <title>adjust window edge in amlogic android system with u-boot bootloader</title>
@@ -28,24 +19,6 @@
       
       <guid>https://dxxzx.github.io/post/preconfigured_window_edge/</guid>
       <description>configure window edge Related files  include/configs/gxl_p211_v1.h, line 145,  #define CONFIG_EXTRA_ENV_SETTINGS \ &amp;quot;firstboot=1\0&amp;quot;\ &amp;quot;upgrade_step=0\0&amp;quot;\ &amp;quot;jtag=apee\0&amp;quot;\ &amp;quot;loadaddr=1080000\0&amp;quot;\ &amp;quot;outputmode=720p50hz\0&amp;quot; \ &amp;quot;hdmimode=720p50hz\0&amp;quot; \ &amp;quot;cvbsmode=576cvbs\0&amp;quot; \ &amp;quot;1080p_h=1037\0&amp;quot; \ &amp;quot;1080p_w=1843\0&amp;quot; \ &amp;quot;1080p_x=38\0&amp;quot; \ &amp;quot;1080p_y=21\0&amp;quot; \ &amp;quot;1080i_h=1037\0&amp;quot; \ &amp;quot;1080i_w=1843\0&amp;quot; \ &amp;quot;1080i_x=38\0&amp;quot; \ &amp;quot;1080i_y=21\0&amp;quot; \ &amp;quot;720p_h=691\0&amp;quot; \ &amp;quot;720p_w=1222\0&amp;quot; \ &amp;quot;720p_x=32\0&amp;quot; \ &amp;quot;720p_y=14\0&amp;quot; \ &amp;quot;576p_h=545\0&amp;quot; \ &amp;quot;576p_w=680\0&amp;quot; \ &amp;quot;576p_x=20\0&amp;quot; \ &amp;quot;576p_y=15\0&amp;quot; \ &amp;quot;576i_h=545\0&amp;quot; \ &amp;quot;576i_w=680\0&amp;quot; \ &amp;quot;576i_x=20\0&amp;quot; \ &amp;quot;576i_y=15\0&amp;quot; \ &amp;quot;480p_h=433\0&amp;quot; \ &amp;quot;480p_w=649\0&amp;quot; \ &amp;quot;480p_x=35\0&amp;quot; \ &amp;quot;480p_y=23\0&amp;quot; \ &amp;quot;480i_h=433\0&amp;quot; \ &amp;quot;480i_w=649\0&amp;quot; \ &amp;quot;480i_x=35\0&amp;quot; \ &amp;quot;480i_y=23\0&amp;quot; \ &amp;quot;uimode=1080p\0&amp;quot; \ &amp;quot;display_width=1920\0&amp;quot; \ &amp;quot;display_height=1080\0&amp;quot; \ &amp;quot;display_bpp=16\0&amp;quot; \ .</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://dxxzx.github.io/about/</link>
-      <pubDate>Mon, 11 Sep 2017 19:06:25 +0800</pubDate>
-      
-      <guid>https://dxxzx.github.io/about/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Contact</title>
-      <link>https://dxxzx.github.io/contact/</link>
-      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://dxxzx.github.io/contact/</guid>
-      <description> First Name  Last Name  E-Mail  City  State AL CA IL      Send   </description>
     </item>
     
   </channel>
