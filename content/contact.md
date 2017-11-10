@@ -5,4 +5,4 @@ sidemenu = "true"
 description = "How to contact me"
 +++
 
-Email: dxx1104@gmail.com
+Welcome for communication, contact me by email: [dxx1104@gmail.com](mailto:dxx1104@gmail.com)

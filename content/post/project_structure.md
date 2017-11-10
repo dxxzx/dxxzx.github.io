@@ -3,7 +3,6 @@ title: "android source directory structure"
 date: 2017-11-10T11:34:11+08:00
 draft: true
 tags: [android,platform]
-topics: []
 description: ""
 ---
 

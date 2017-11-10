@@ -1,6 +1,6 @@
 baseURL = "https://dxxzx.github.io/"
 languageCode = "en-us"
-title = "Dylan's blog"
+title = "Dylan"
 author = "Dylan Deng"
 theme = 'blackburn'
 # Shown in the side menu
@@ -10,18 +10,18 @@ paginate = 10
 
 [indexes]
   tag = "tags"
-  topic = "topics"
+  #topic = "topics"
 
 [params]
   # Shown in the home page
-  subtitle = "A Hugo Theme"
+  subtitle = "Android App Developer/Android System Developer/Machine Learning Beginner"
   brand = "Blackburn"
   #googleAnalytics = "Your Google Analytics tracking ID"
   disqus = "Your Disqus shortname"
   # CSS name for highlight.js
   highlightjs = "androidstudio"
   highlightjs_extra_languages = ["yaml"]
-  dateFormat = "02 Jan 2006, 15:04"
+  dateFormat = "02 Jan 2006"
   # Include any custom CSS and/or JS files
   # (relative to /static folder)
   # custom_css = ["css/my.css"]
@@ -42,15 +42,21 @@ paginate = 10
     identifier = "post"
     url = "/post/"
   [[menu.main]]
+    name = "Tags"
+    pre = "<i class='fa fa-tag fa-fw'></i>"
+    weight = 3
+    identifier = "tags"
+    url = "/tags/"
+  [[menu.main]]
     name = "About"
     pre = "<i class='fa fa-user fa-fw'></i>"
-    weight = 3
+    weight = 4
     identifier = "about"
     url = "/about/"
   [[menu.main]]
     name = "Contact"
     pre = "<i class='fa fa-phone fa-fw'></i>"
-    weight = 4
+    weight = 5
     url = "/contact/"
 
 [social]

@@ -3,7 +3,6 @@ title: "jenkins ldap auth"
 date: 2017-11-10T13:36:11+08:00
 draft: false
 tags: [jenkins,ldap]
-topics: []
 description: ""
 ---
 

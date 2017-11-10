@@ -2,6 +2,8 @@
 title: "understanding android compiling progress"
 date: 2017-09-12T09:21:11+08:00
 draft: true
+tags: [android]
+description: ""
 ---
 
 - build/core/main.mk:108:`include $(BUILD_SYSTEM)/config.mk`

@@ -3,7 +3,6 @@ title: "ubuntu ldap auth"
 date: 2017-11-10T11:34:11+08:00
 draft: false
 tags: [ubuntu,ldap]
-topics: []
 description: ""
 ---
 
