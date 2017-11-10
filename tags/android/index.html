@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.26" />
 
-  <title>Dylan&#39;s blog</title>
+  <title>Android &middot; Dylan&#39;s blog</title>
 
   
   
@@ -37,7 +37,7 @@
 
   
   
-  <link rel="alternate" type="application/rss+xml" title="Dylan&#39;s blog" href="https://dxxzx.github.io/index.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Dylan&#39;s blog" href="https://dxxzx.github.io/tags/android/index.xml" />
   
 
   
@@ -106,7 +106,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://dxxzx.github.io/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      <a class="pure-menu-link" href="https://dxxzx.github.io/tags/android/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
     </li>
     
 
@@ -227,160 +227,10 @@
 
 
 <div class="header">
-  <h1>Dylan&#39;s blog</h1>
-  <h2>A Hugo Theme</h2>
+  <h1>Android</h1>
 </div>
 
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/jenkins_ldap_auth/">jenkins ldap auth</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017, 13:36</time>
-  </div>
-
-  
-
-  
-  
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/jenkins">jenkins</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
-    
-  </div>
-  
-  
-
-</div>
-
-  </header>
-
-  <p>
-   Jenkins Authorize with LDAP Install LDAP plugin login to jenkins, go to Manage Jenkins -&gt; Manage Plugins -&gt; Available to install LDAP plugin.
-Configure LDAP plugin login to jenkins, go to Manage Jenkins -&gt; Configure Global Security -&gt; Access Coutrol to configure LDAP.
- Server: &lt;host name of ldap server&gt;, possible value: 192.168.1.101, ldap.example.com root DN: usually be dc=my-domain,dc=com User search base: usually be ou=People User search filter: usually be uid={0} Manager DN: usually be cn=Manager,dc=my-domain,dc=com or cn=admin,dc=my-domain,dc=com Manager Password: Your Manager password Display Name LDAP attribute: usually be displayname Email Address LDAP attribute: usually be mail  
-  </p>
-
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/openldap_service/">openldap service establish guide</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017, 11:34</time>
-  </div>
-
-  
-
-  
-  
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/openldap">openldap</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
-    
-  </div>
-  
-  
-
-</div>
-
-  </header>
-
-  <p>
-  搭建ldap服务器 安装并启动服务 yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd  设置 OpenLDAP 的管理员密码 首先要生成经处理后的明文密码：
-# slappasswd New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8  其中 {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx 就是加密处理后的明文密码，之后会用到这个密码。 之后再新建如下文件:
-cat &gt; chrootpw.ldif &lt;&lt; &quot;EOF&quot; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF  最后导入该文件：
-# ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif SASL/EXTERNAL authentication started SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth SASL SSF: 0 modifying entry &quot;olcDatabase={0}config,cn=config&quot;  导入基本 Schema（可以有选择的导入） cd /etc/openldap/schema/ ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f cosine.
-  </p>
-
-  
-  <footer>
-    <a href="https://dxxzx.github.io/post/openldap_service/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/ubuntu_ldap_auth/">ubuntu ldap auth</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017, 11:34</time>
-  </div>
-
-  
-
-  
-  
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ubuntu">ubuntu</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
-    
-  </div>
-  
-  
-
-</div>
-
-  </header>
-
-  <p>
-  ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts  某些配置条目可能如下：
-base dc=tianyisc,dc=com uri ldap://192.168.99.89/ binddn cn=Manager,dc=tianyisc,dc=com bindpw password rootbinddn cn=Manager,dc=tianyisc,dc=com  Now configure the LDAP profile for NSS:
-sudo auth-client-config -t nss -p lac_ldap  Configure the system to use LDAP for authentication:
-sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the package:
-&gt; sudo apt install ldapscripts &gt; ``` &gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following: &gt; ``` &gt; SERVER=localhost &gt; BINDDN='cn=admin,dc=example,dc=com' &gt; BINDPWDFILE=&quot;/etc/ldapscripts/ldapscripts.
-  </p>
-
-  
-  <footer>
-    <a href="https://dxxzx.github.io/post/ubuntu_ldap_auth/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
   
     <article>
   <header>
@@ -431,10 +281,6 @@ sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the packag
 </article>
 
   
-
-  
-
-
 </div>
 
 </div>
@@ -446,4 +292,3 @@ sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the packag
 
 </body>
 </html>
-

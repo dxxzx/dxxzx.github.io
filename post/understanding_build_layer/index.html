@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.26" />
+
+  <title>understanding android build layer &middot; Dylan&#39;s blog</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://dxxzx.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://dxxzx.github.io/">Blackburn</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
+    </li>
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/dxxzx" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://stackoverflow.com/users/*" target="_blank"><i class="fa fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2017. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>understanding android build layer</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>10 Nov 2017, 11:34</time>
+  </div>
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/build">build</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+
+<h1 id="理解构建层">理解构建层</h1>
+
+<p>先看看Android官方的解释</p>
+
+<blockquote>
+<h2 id="understand-build-layers">Understand Build Layers</h2>
+
+<p>The build hierarchy includes the abstraction layers that correspond to the physical makeup of a device. These layers are described in the table below. Each layer relates to the one above it in a one-to-many relationship. For example, an architecture can have more than one board and each board can have more than one product. You may define an element in a given layer as a specialization of an element in the same layer, thus eliminating copying and simplifying maintenance.</p>
+
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Product</td>
+<td>myProduct, myProduct_eu, myProduct_eu_fr, j2, sdk</td>
+<td>The product layer defines the feature specification of a shipping product such as the modules to build, locales supported, and the configuration for various locales. In other words, this is the name of the overall product. Product-specific variables are defined in product definition Makefiles. A product can inherit from other product definitions, which simplifies maintenance. A common method is to create a base product that contains features that apply for all products, then creating product variants based on that base product. For example, you can have two products that differ only by their radios (CDMA vs GSM) inherit from the same base product that does not define a radio.</td>
+</tr>
+
+<tr>
+<td>Board/Device</td>
+<td>sardine, trout, goldfish</td>
+<td>The device/board layer represents the physical layer of plastic on the device (i.e. the industrial design of the device). For example, North American devices probably include QWERTY keyboards whereas devices sold in France probably include AZERTY keyboards. This layer also represents the bare schematics of a product. These include the peripherals on the board and their configuration. The names used are merely codes for different board/device configurations.</td>
+</tr>
+
+<tr>
+<td>Arch</td>
+<td>arm, x86, mips, arm64, x86_64, mips64</td>
+<td>The architecture layer describes the processor configuration and ABI (Application Binary Interface) running on the board.</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+
+<h2 id="产品层">产品层</h2>
+
+<p>典型的产品定义文件夹一般会有以下文件</p>
+
+<ul>
+<li>vendorsetup.sh</li>
+<li>AndroidProducts.mk</li>
+<li>product.mk</li>
+</ul>
+
+<h3 id="vendorsetup-sh">vendorsetup.sh</h3>
+
+<p>这个文件非常简单，只是添加产品条目而已，比如像下面这样：</p>
+
+<pre><code class="language-bash">add_lunch_combo p201_iptv-eng
+add_lunch_combo p201_iptv-user
+add_lunch_combo p201_iptv-userdebug
+</code></pre>
+
+<h3 id="androidproducts-mk">AndroidProducts.mk</h3>
+
+<p>这个文件也很简单，只是指定产品的构建文件而已，例：</p>
+
+<pre><code class="language-Makefile">PRODUCT_MAKEFILES := $(LOCAL_DIR)/sample.mk
+</code></pre>
+
+<p>这里可以指定多个构建文件，一个文件对应一种产品，文件名必须与产品名相同。</p>
+
+<h3 id="product-mk">product.mk</h3>
+
+<p>product即为产品名，也就是AndroidProducts.mk中指定的构建文件。这个文件中一般定义了产品构建所必要的所有特性。</p>
+
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>PRODUCT_AAPT_CONFIG</td>
+<td>aapt configurations to use when creating packages</td>
+<td></td>
+</tr>
+
+<tr>
+<td>PRODUCT_BRAND</td>
+<td>The brand (e.g., carrier) the software is customized for, if any</td>
+<td></td>
+</tr>
+
+<tr>
+<td>PRODUCT_CHARACTERISTICS</td>
+<td>aapt characteristics to allow adding variant-specific resources to a package.</td>
+<td>tablet,nosdcard</td>
+</tr>
+
+<tr>
+<td>PRODUCT_COPY_FILES</td>
+<td>List of words like source_path:destination_path. The file at the source path should be copied to the destination path when building this product. The rules for the copy steps are defined in config/Makefile</td>
+<td></td>
+</tr>
+
+<tr>
+<td>PRODUCT_DEVICE</td>
+<td>Name of the industrial design. This is also the board name, and the build system uses it to locate the BoardConfig.mk.</td>
+<td>tuna</td>
+</tr>
+
+<tr>
+<td>PRODUCT_LOCALES</td>
+<td>A space-separated list of two-letter language code, two-letter country code pairs that describe several settings for the user, such as the UI language and time, date and currency formatting. The first locale listed in PRODUCT_LOCALES is used as the product&rsquo;s default locale.</td>
+<td>en_GB de_DE es_ES fr_CA</td>
+</tr>
+
+<tr>
+<td>PRODUCT_MANUFACTURER</td>
+<td>Name of the manufacturer</td>
+<td>acme</td>
+</tr>
+
+<tr>
+<td>PRODUCT_MODEL</td>
+<td>End-user-visible name for the end product</td>
+<td></td>
+</tr>
+
+<tr>
+<td>PRODUCT_NAME</td>
+<td>End-user-visible name for the overall product. Appears in the Settings &gt; About screen.</td>
+<td></td>
+</tr>
+
+<tr>
+<td>PRODUCT_OTA_PUBLIC_KEYS</td>
+<td>List of Over the Air (OTA) public keys for the product</td>
+<td></td>
+</tr>
+
+<tr>
+<td>PRODUCT_PACKAGES</td>
+<td>Lists the APKs and modules to install.</td>
+<td>Calendar Contacts</td>
+</tr>
+
+<tr>
+<td>PRODUCT_PACKAGE_OVERLAYS</td>
+<td>Indicate whether to use default resources or add any product specific overlays</td>
+<td>vendor/acme/overlay</td>
+</tr>
+
+<tr>
+<td>PRODUCT_PROPERTY_OVERRIDES</td>
+<td>List of system property assignments in the format &ldquo;key=value&rdquo;</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+
+<h2 id="设备层">设备层</h2>
+
+<p>典型的设备层定义文件夹至少包含一个文件BoardConfig.mk，一般设备层还包含另外一个文件AndroidBoard.mk。这两个文件，BoardConfig.mk一般只是定义一些设备相关的宏，用于在其他地方使用，比如kernel,bootloader的编译。AndroidBoard.mk则是定义一些设备相关的编译规则和目标等。在很多例子里，设备定义路径与产品定义路径相同。比如我们项目中的device/amlogic/p201_iptv文件夹。</p>
+
+<p>参考：</p>
+
+<p><a href="https://source.android.com/source/add-device">Adding a New Device &nbsp;|&nbsp; Android Open Source Project</a></p>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://dxxzx.github.io/post/ubuntu_ldap_auth/">ubuntu ldap auth</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://dxxzx.github.io/post/ubuntu_ldap_auth/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'Your Disqus shortname';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="https://dxxzx.github.io/js/ui.js"></script>
+
+
+
+
+</body>
+</html>
+

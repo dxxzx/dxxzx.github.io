@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.26" />
+
+  <title>ubuntu ldap auth &middot; Dylan&#39;s blog</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://dxxzx.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://dxxzx.github.io/">Blackburn</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
+    </li>
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/dxxzx" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://stackoverflow.com/users/*" target="_blank"><i class="fa fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2017. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>ubuntu ldap auth</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>10 Nov 2017, 11:34</time>
+  </div>
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ubuntu">ubuntu</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+
+<h1 id="ubuntu网络认证">ubuntu网络认证</h1>
+
+<h2 id="安装必要软件">安装必要软件</h2>
+
+<pre><code class="language-sh">sudo apt install libnss-ldap ldapscripts
+</code></pre>
+
+<p>某些配置条目可能如下：</p>
+
+<pre><code>base dc=tianyisc,dc=com
+uri ldap://192.168.99.89/
+binddn cn=Manager,dc=tianyisc,dc=com
+bindpw password
+rootbinddn cn=Manager,dc=tianyisc,dc=com
+</code></pre>
+
+<p>Now configure the LDAP profile for NSS:</p>
+
+<pre><code class="language-sh">sudo auth-client-config -t nss -p lac_ldap
+</code></pre>
+
+<p>Configure the system to use LDAP for authentication:</p>
+
+<pre><code class="language-sh">sudo pam-auth-update
+</code></pre>
+
+<h2 id="添加用户">添加用户</h2>
+
+<h3 id="ldapscript-方式一">ldapscript（方式一）</h3>
+
+<blockquote>
+<p>Install the package:</p>
+
+<pre><code class="language-sh">&gt; sudo apt install ldapscripts
+&gt; ```
+&gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following:
+&gt; ```
+&gt; SERVER=localhost
+&gt; BINDDN='cn=admin,dc=example,dc=com'
+&gt; BINDPWDFILE=&quot;/etc/ldapscripts/ldapscripts.passwd&quot;
+&gt; SUFFIX='dc=example,dc=com'
+&gt; GSUFFIX='ou=Groups'
+&gt; USUFFIX='ou=People'
+&gt; MSUFFIX='ou=Computers'
+&gt; GIDSTART=10000
+&gt; UIDSTART=10000
+&gt; MIDSTART=10000
+&gt; ```
+&gt; Now, create the ldapscripts.passwd file to allow rootDN access to the directory:
+&gt; ```sh
+&gt; sudo sh -c &quot;echo -n 'secret' &gt; /etc/ldapscripts/ldapscripts.passwd&quot;
+&gt; sudo chmod 400 /etc/ldapscripts/ldapscripts.passwd
+&gt; ```
+&gt; Replace “secret” with the actual password for your database's rootDN user.
+&gt; 
+&gt; The scripts are now ready to help manage your directory. Here are some examples of how to use them:
+&gt; 
+&gt; Create a new user:
+&gt; ```sh
+&gt; sudo ldapadduser george example
+&gt; ```
+&gt; This will create a user with uid george and set the user's primary group (gid) to example
+&gt; 
+&gt; Change a user's password:
+&gt; ```sh
+&gt; sudo ldapsetpasswd george
+&gt; Changing password for user uid=george,ou=People,dc=example,dc=com
+&gt; New Password: 
+&gt; New Password (verify):
+&gt; ```
+&gt; Delete a user:
+&gt; ```sh
+&gt; sudo ldapdeleteuser george
+&gt; ```
+&gt; Add a group:
+&gt; ```sh
+&gt; sudo ldapaddgroup qa
+&gt; ```
+&gt; Delete a group:
+&gt; ```sh
+&gt; sudo ldapdeletegroup qa
+&gt; ```
+&gt; Add a user to a group:
+&gt; ```sh
+&gt; sudo ldapaddusertogroup george qa
+&gt; ```
+&gt; You should now see a memberUid attribute for the qa group with a value of george.
+&gt; 
+&gt; Remove a user from a group:
+&gt; ```sh
+&gt; sudo ldapdeleteuserfromgroup george qa
+&gt; ```
+&gt; The memberUid attribute should now be removed from the qa group.
+&gt; 
+&gt; The ldapmodifyuser script allows you to add, remove, or replace a user's attributes. The script uses the same syntax as the ldapmodify utility. &gt; For example:
+&gt; ```sh
+&gt; sudo ldapmodifyuser george
+&gt; # About to modify the following entry :
+&gt; dn: uid=george,ou=People,dc=example,dc=com
+&gt; objectClass: account
+&gt; objectClass: posixAccount
+&gt; cn: george
+&gt; uid: george
+&gt; uidNumber: 1001
+&gt; gidNumber: 1001
+&gt; homeDirectory: /home/george
+&gt; loginShell: /bin/bash
+&gt; gecos: george
+&gt; description: User account
+&gt; userPassword:: e1NTSEF9eXFsTFcyWlhwWkF1eGUybVdFWHZKRzJVMjFTSG9vcHk=
+&gt; 
+&gt; # Enter your modifications here, end with CTRL-D.
+&gt; dn: uid=george,ou=People,dc=example,dc=com
+&gt; replace: gecos
+&gt; gecos: George Carlin
+&gt; ```
+&gt; The user's gecos should now be “George Carlin”.
+
+__这种方法添加的用户需要额外添加一些属性，尤其mail属性，这会在其他使用到__
+添加mail属性
+```sh
+sudo ldapmodifyuser george
+# About to modify the following entry :
+dn: uid=george,ou=People,dc=example,dc=com
+objectClass: account
+objectClass: posixAccount
+cn: george
+uid: george
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/george
+loginShell: /bin/bash
+gecos: george
+description: User account
+userPassword:: e1NTSEF9eXFsTFcyWlhwWkF1eGUybVdFWHZKRzJVMj
+# Enter your modifications here, end with CTRL-D.
+dn: uid=george,ou=People,dc=example,dc=com
+add: mail
+mail: username@example.com
+</code></pre>
+</blockquote>
+
+<h3 id="ldapadd-方式二">ldapadd（方式二）</h3>
+
+<p>编辑文件add_user.ldif</p>
+
+<pre><code class="language-sh">cat &gt; add_user.ldif &lt;&lt; &quot;EOF&quot;
+dn: uid=dylan,ou=People,dc=tianyisc,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: dylan
+sn: Deng
+givenName: Dylan
+cn: Dylan Deng
+displayName: Dylan Deng
+uidNumber: 10000
+gidNumber: 5000
+gecos: Dylan Deng
+loginShell: /bin/bash
+homeDirectory: /home/dylan
+mail: dengxingxian@tianyisc.com
+EOF
+</code></pre>
+
+<p>添加用户</p>
+
+<pre><code class="language-sh">ldapadd -LLL -D cn=Manager,dc=tianyisc,dc=com -h 192.168.99.89 -b dc=tianyisc,dc=com -W -f add_user.ldif
+</code></pre>
+
+<p><strong>这样添加的用户仅存在于网络上，不能使用passwd修改密码完善方法如下：</strong></p>
+
+<p>在/etc/passwd中添加对应的用户信息</p>
+
+<pre><code>dylan:x:10000:5000:Dylan Deng:/home/dylan:/bin/bash
+</code></pre>
+
+<p>参考：
+- <a href="https://help.ubuntu.com/lts/serverguide/openldap-server.html#openldap-auth-config">OpenLDAP Server</a></p>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://dxxzx.github.io/post/understanding_build_layer/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://dxxzx.github.io/post/understanding_build_layer/">understanding android build layer</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://dxxzx.github.io/post/openldap_service/">openldap service establish guide</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://dxxzx.github.io/post/openldap_service/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'Your Disqus shortname';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="https://dxxzx.github.io/js/ui.js"></script>
+
+
+
+
+</body>
+</html>
+

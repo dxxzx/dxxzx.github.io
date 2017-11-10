@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.26" />
+
+  <title>openldap service establish guide &middot; Dylan&#39;s blog</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://dxxzx.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://dxxzx.github.io/">Blackburn</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
+    </li>
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/dxxzx" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://stackoverflow.com/users/*" target="_blank"><i class="fa fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2017. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>openldap service establish guide</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>10 Nov 2017, 11:34</time>
+  </div>
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/openldap">openldap</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+
+<h1 id="搭建ldap服务器">搭建ldap服务器</h1>
+
+<h2 id="安装并启动服务">安装并启动服务</h2>
+
+<pre><code class="language-sh">yum install openldap-servers openldap-clients
+cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+chown ldap. /var/lib/ldap/DB_CONFIG
+systemctl start slapd
+systemctl enable slapd
+</code></pre>
+
+<h2 id="设置-openldap-的管理员密码">设置 OpenLDAP 的管理员密码</h2>
+
+<p>首先要生成经处理后的明文密码：</p>
+
+<pre><code class="language-sh"># slappasswd    
+New password:   
+Re-enter new password:   
+{SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
+</code></pre>
+
+<p>其中 {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx 就是加密处理后的明文密码，之后会用到这个密码。
+之后再新建如下文件:</p>
+
+<pre><code class="language-sh">cat &gt; chrootpw.ldif &lt;&lt; &quot;EOF&quot;
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
+EOF
+</code></pre>
+
+<p>最后导入该文件：</p>
+
+<pre><code class="language-sh"># ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif  
+SASL/EXTERNAL authentication started  
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth  
+SASL SSF: 0  
+modifying entry &quot;olcDatabase={0}config,cn=config&quot;  
+</code></pre>
+
+<h2 id="导入基本-schema-可以有选择的导入">导入基本 Schema（可以有选择的导入）</h2>
+
+<pre><code class="language-sh">cd /etc/openldap/schema/  
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f cosine.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f nis.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f collective.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f corba.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f core.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f duaconf.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f dyngroup.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f inetorgperson.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f java.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f misc.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f openldap.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f pmi.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f ppolicy.ldif
+</code></pre>
+
+<h2 id="设置自己的-domain-name">设置自己的 Domain Name</h2>
+
+<p>首先要生成经处理后的目录管理者明文密码：</p>
+
+<pre><code class="language-sh"># slappasswd  
+New password:   
+Re-enter new password:   
+{SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
+</code></pre>
+
+<p>之后，再新建如下文件，文件内容如下，注意，要使用你自己的域名替换掉文件中所有的 &ldquo;dc=<strong><em>,dc=</em></strong>&ldquo;，并且使用刚刚生成的密码，替换文中的 &ldquo;olcRootPW&rdquo; 部分：</p>
+
+<pre><code class="language-sh">cat &gt; chdomain.ldif &lt;&lt; &quot;EOF&quot;
+# replace to your own domain name for &quot;dc=***,dc=***&quot; section  
+# specify the password generated above for &quot;olcRootPW&quot; section  
+dn: olcDatabase={1}monitor,cn=config  
+changetype: modify  
+replace: olcAccess  
+olcAccess: {0}to * by dn.base=&quot;gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth&quot;  
+  read by dn.base=&quot;cn=Manager,dc=tianyisc,dc=com&quot; read by * none  
+  
+dn: olcDatabase={2}hdb,cn=config  
+changetype: modify  
+replace: olcSuffix  
+olcSuffix: dc=tianyisc,dc=com  
+  
+dn: olcDatabase={2}hdb,cn=config  
+changetype: modify  
+replace: olcRootDN  
+olcRootDN: cn=Manager,dc=tianyisc,dc=com  
+  
+dn: olcDatabase={2}hdb,cn=config  
+changetype: modify  
+add: olcRootPW  
+olcRootPW: {SSHA}ZhmO2UeH4tsyy5ly0fTwdkO10WJ69V6U  
+  
+dn: olcDatabase={2}hdb,cn=config  
+changetype: modify  
+add: olcAccess  
+olcAccess: {0}to attrs=userPassword,shadowLastChange by  
+  dn=&quot;cn=Manager,dc=tianyisc,dc=com&quot; write by anonymous auth by self write by * none  
+olcAccess: {1}to dn.base=&quot;&quot; by * read  
+olcAccess: {2}to * by dn=&quot;cn=Manager,dc=tianyisc,dc=com&quot; write by * read
+EOF
+</code></pre>
+
+<p>之后再导入该文件：</p>
+
+<pre><code class="language-sh"># ldapmodify -Y EXTERNAL -H ldapi:/// -f chdomain.ldif    
+SASL/EXTERNAL authentication started  
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth  
+SASL SSF: 0  
+modifying entry &quot;olcDatabase={1}monitor,cn=config&quot;  
+  
+modifying entry &quot;olcDatabase={2}hdb,cn=config&quot;  
+  
+modifying entry &quot;olcDatabase={2}hdb,cn=config&quot;  
+  
+modifying entry &quot;olcDatabase={2}hdb,cn=config&quot;  
+  
+modifying entry &quot;olcDatabase={2}hdb,cn=config&quot;  
+</code></pre>
+
+<p>然后再新建如下文件,  文件内容如下，注意，要使用你自己的域名替换掉文件中所有的 &ldquo;dc=<strong><em>,dc=</em></strong>&ldquo;：</p>
+
+<pre><code class="language-sh">cat &gt; basedomain.ldif &lt;&lt; &quot;EOF&quot;
+dn: dc=tianyisc,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: TianYi
+dc: tianyisc
+
+dn: ou=People,dc=tianyisc,dc=com
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Groups,dc=tianyisc,dc=com
+objectClass: organizationalUnit
+ou: Groups
+
+dn: cn=developers,ou=Groups,dc=tianyisc,dc=com
+objectClass: posixGroup
+cn: developers
+gidNumber: 5000
+EOF
+</code></pre>
+
+<p>最后导入该文件：</p>
+
+<pre><code class="language-sh"># ldapadd -x -D cn=Manager,dc=tianyisc,dc=com -W -f basedomain.ldif  
+Enter LDAP Password:   
+adding new entry &quot;dc=tianyisc,dc=com&quot;  
+  
+adding new entry &quot;cn=Manager,dc=tianyisc,dc=com&quot;  
+  
+adding new entry &quot;ou=People,dc=tianyisc,dc=com&quot;  
+  
+adding new entry &quot;ou=Group,dc=tianyisc,dc=com&quot;  
+</code></pre>
+
+<h2 id="允许防火墙访问-ldap-服务">允许防火墙访问 LDAP 服务</h2>
+
+<pre><code class="language-sh">firewall-cmd --zone=internal --add-source=192.168.99.0/24 --permanent   # 使用internal区域，并将ip范围加入internal区域
+firewall-cmd --zone=internal --add-service=ldap --permanent             # 允许ldap服务
+firewall-cmd --reload                                                   # 重新加载防火墙规则
+</code></pre>
+
+<p>references:</p>
+
+<ul>
+<li><a href="http://yhz61010.iteye.com/blog/2352672">[原创] CentOS7 下 OpenLDAP Server 安装和配置及使用 phpLDAPadmin 和 Java LDAP 访问 LDAP Server - Leo&rsquo;s Blog - ITeye博客</a></li>
+</ul>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://dxxzx.github.io/post/ubuntu_ldap_auth/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://dxxzx.github.io/post/ubuntu_ldap_auth/">ubuntu ldap auth</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://dxxzx.github.io/post/jenkins_ldap_auth/">jenkins ldap auth</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://dxxzx.github.io/post/jenkins_ldap_auth/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'Your Disqus shortname';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="https://dxxzx.github.io/js/ui.js"></script>
+
+
+
+
+</body>
+</html>
+

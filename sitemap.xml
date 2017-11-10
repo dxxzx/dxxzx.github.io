@@ -3,23 +3,86 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://dxxzx.github.io/post/jenkins_ldap_auth/</loc>
+    <lastmod>2017-11-10T13:36:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/post/openldap_service/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/post/ubuntu_ldap_auth/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/post/understanding_build_layer/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://dxxzx.github.io/contact/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://dxxzx.github.io/tags/android/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/tags/build/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://dxxzx.github.io/</loc>
-    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-10T13:36:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/tags/jenkins/</loc>
+    <lastmod>2017-11-10T13:36:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/tags/ldap/</loc>
+    <lastmod>2017-11-10T13:36:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/tags/openldap/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/post/</loc>
+    <lastmod>2017-11-10T13:36:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://dxxzx.github.io/tags/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://dxxzx.github.io/topics/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/tags/ubuntu/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
