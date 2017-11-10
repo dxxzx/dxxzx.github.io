@@ -58,21 +58,12 @@ paginate = 10
   # SNS microblogging
   facebook = "dxxzx"
   googleplus = "102591860149128628370"
-  weibo = "dxxai@163.com"
+  weibo = "u/2624573885"
 
 
   # SNS photo/video sharing
-  instagram = "*"
-  flickr = "*"
   youtube = "*"
- 
-
-  # SNS career oriented
-  linkedin = "*"
-
 
   # Techie
   github = "dxxzx"
-  bitbucket = "*"
   stackoverflow = "*"
-  serverfault = "*"
