@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.26" />
 
-  <title>understanding android compiling progress &middot; Dylan&#39;s blog</title>
+  <title>Build &middot; Dylan&#39;s blog</title>
 
   
   
@@ -36,6 +36,8 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  
+  <link rel="alternate" type="application/rss+xml" title="Dylan&#39;s blog" href="https://dxxzx.github.io/tags/build/index.xml" />
   
 
   
@@ -103,6 +105,10 @@
   <ul class="pure-menu-list">
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://dxxzx.github.io/tags/build/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+    </li>
+    
 
     
 
@@ -124,7 +130,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="http://weibo.com/dxxai@163.com" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
+      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
     </li>
     
 
@@ -133,15 +139,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/*" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
-    </li>
-    
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://flickr.com/photos/*" target="_blank"><i class="fa fa-flickr fa-fw"></i>Flickr</a>
-    </li>
     
 
     
@@ -163,10 +161,6 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://linkedin.com/in/*" target="_blank"><i class="fa fa-linkedin-square fa-fw"></i>LinkedIn</a>
-    </li>
-    
 
     
 
@@ -187,10 +181,6 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://bitbucket.org/*" target="_blank"><i class="fa fa-bitbucket-square fa-fw"></i>Bitbucket</a>
-    </li>
-    
 
     
     <li class="pure-menu-item">
@@ -198,10 +188,6 @@
     </li>
     
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://serverfault.com/users/*" target="_blank"><i class="fa fa-server fa-fw"></i>Server Fault</a>
-    </li>
     
 
     
@@ -241,89 +227,60 @@
 
 
 <div class="header">
-  <h1>understanding android compiling progress</h1>
-  <h2></h2>
+  <h1>Build</h1>
 </div>
-<div class="content">
 
-  <div class="post-meta">
+<div class="content">
+  
+    <article>
+  <header>
+    <h2><a href="https://dxxzx.github.io/post/understanding_build_layer/">understanding android build layer</a></h2>
+
+    <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>12 Sep 2017, 09:21</time>
+    <time>10 Nov 2017, 11:34</time>
   </div>
 
   
 
   
+  
+  
+  
 
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/build">build</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>
+    
+  </div>
+  
   
 
 </div>
 
-  <ul>
-<li>build/core/main.mk:108:<code>include $(BUILD_SYSTEM)/config.mk</code></li>
-<li>build/core/config.mk:137:<code>include $(BUILD_SYSTEM)/envsetup.mk</code></li>
-<li>build/core/config.mk:155:<code>include $(board_config_mk)</code></li>
-<li>build/core/envsetup.mk:115:<code>include $(BUILD_SYSTEM)/product_config.mk</code></li>
-<li>build/core/product_config.mk:179:<code>include $(BUILD_SYSTEM)/product.mk</code></li>
-<li>build/core/product_config.mk:180:<code>include $(BUILD_SYSTEM)/device.mk</code></li>
-<li>build/core/config.mk:45:<code>SRC_TARGET_DIR := $(TOPDIR)build/target</code></li>
-<li>build/core/config.mk:139:<code># Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)</code></li>
-<li>build/core/config.mk:145:<code>$(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)/BoardConfig.mk \</code></li>
-<li>build/core/product_config.mk:185:<code>$(SRC_TARGET_DIR)/product/AndroidProducts.mk)</code></li>
-<li>build/core/product_config.mk:267:<code>$(foreach runtime, $(product_runtimes), $(eval include $(SRC_TARGET_DIR)/product/$(runtime).mk))</code></li>
-<li>build/core/product.mk:33:<code>$(SRC_TARGET_DIR)/product/AndroidProducts.mk</code></li>
-</ul>
+  </header>
 
+  <p>
+  理解构建层 先看看Android官方的解释
+ Understand Build Layers The build hierarchy includes the abstraction layers that correspond to the physical makeup of a device. These layers are described in the table below. Each layer relates to the one above it in a one-to-many relationship. For example, an architecture can have more than one board and each board can have more than one product. You may define an element in a given layer as a specialization of an element in the same layer, thus eliminating copying and simplifying maintenance.
+  </p>
 
   
-<div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="https://dxxzx.github.io/post/preconfigured_window_edge/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="https://dxxzx.github.io/post/preconfigured_window_edge/">adjust window edge in amlogic android system with u-boot bootloader</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-  </div>
-</div>
-
-
+  <footer>
+    <a href="https://dxxzx.github.io/post/understanding_build_layer/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
 
   
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'Your Disqus shortname';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
 </div>
 
 </div>
@@ -335,4 +292,3 @@
 
 </body>
 </html>
-

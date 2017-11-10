@@ -7,44 +7,62 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 12 Sep 2017 09:15:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate>
     
 	<atom:link href="https://dxxzx.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Bootloader</title>
-      <link>https://dxxzx.github.io/tags/bootloader/</link>
-      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      <title>Android</title>
+      <link>https://dxxzx.github.io/tags/android/</link>
+      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
-      <guid>https://dxxzx.github.io/tags/bootloader/</guid>
+      <guid>https://dxxzx.github.io/tags/android/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Resolution</title>
-      <link>https://dxxzx.github.io/tags/resolution/</link>
-      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      <title>Build</title>
+      <link>https://dxxzx.github.io/tags/build/</link>
+      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
-      <guid>https://dxxzx.github.io/tags/resolution/</guid>
+      <guid>https://dxxzx.github.io/tags/build/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Screen Edge</title>
-      <link>https://dxxzx.github.io/tags/screen-edge/</link>
-      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      <title>Jenkins</title>
+      <link>https://dxxzx.github.io/tags/jenkins/</link>
+      <pubDate>Fri, 10 Nov 2017 13:36:11 +0800</pubDate>
       
-      <guid>https://dxxzx.github.io/tags/screen-edge/</guid>
+      <guid>https://dxxzx.github.io/tags/jenkins/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>U Boot</title>
-      <link>https://dxxzx.github.io/tags/u-boot/</link>
-      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      <title>Ldap</title>
+      <link>https://dxxzx.github.io/tags/ldap/</link>
+      <pubDate>Fri, 10 Nov 2017 13:36:11 +0800</pubDate>
       
-      <guid>https://dxxzx.github.io/tags/u-boot/</guid>
+      <guid>https://dxxzx.github.io/tags/ldap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Openldap</title>
+      <link>https://dxxzx.github.io/tags/openldap/</link>
+      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/tags/openldap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>https://dxxzx.github.io/tags/ubuntu/</link>
+      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/tags/ubuntu/</guid>
       <description></description>
     </item>
     

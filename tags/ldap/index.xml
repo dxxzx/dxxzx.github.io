@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Dylan&#39;s blog</title>
-    <link>https://dxxzx.github.io/post/</link>
-    <description>Recent content in Posts on Dylan&#39;s blog</description>
+    <title>Ldap on Dylan&#39;s blog</title>
+    <link>https://dxxzx.github.io/tags/ldap/</link>
+    <description>Recent content in Ldap on Dylan&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
     <lastBuildDate>Fri, 10 Nov 2017 13:36:11 +0800</lastBuildDate>
     
-	<atom:link href="https://dxxzx.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dxxzx.github.io/tags/ldap/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -46,16 +46,6 @@ base dc=tianyisc,dc=com uri ldap://192.168.99.89/ binddn cn=Manager,dc=tianyisc,
 sudo auth-client-config -t nss -p lac_ldap  Configure the system to use LDAP for authentication:
 sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the package:
 &amp;gt; sudo apt install ldapscripts &amp;gt; ``` &amp;gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following: &amp;gt; ``` &amp;gt; SERVER=localhost &amp;gt; BINDDN=&#39;cn=admin,dc=example,dc=com&#39; &amp;gt; BINDPWDFILE=&amp;quot;/etc/ldapscripts/ldapscripts.</description>
-    </item>
-    
-    <item>
-      <title>understanding android build layer</title>
-      <link>https://dxxzx.github.io/post/understanding_build_layer/</link>
-      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
-      
-      <guid>https://dxxzx.github.io/post/understanding_build_layer/</guid>
-      <description>理解构建层 先看看Android官方的解释
- Understand Build Layers The build hierarchy includes the abstraction layers that correspond to the physical makeup of a device. These layers are described in the table below. Each layer relates to the one above it in a one-to-many relationship. For example, an architecture can have more than one board and each board can have more than one product. You may define an element in a given layer as a specialization of an element in the same layer, thus eliminating copying and simplifying maintenance.</description>
     </item>
     
   </channel>

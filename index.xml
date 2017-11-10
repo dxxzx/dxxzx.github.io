@@ -7,36 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 12 Sep 2017 09:21:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Nov 2017 13:36:11 +0800</lastBuildDate>
     
 	<atom:link href="https://dxxzx.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>understanding android compiling progress</title>
-      <link>https://dxxzx.github.io/post/android_compilation_procedure/</link>
-      <pubDate>Tue, 12 Sep 2017 09:21:11 +0800</pubDate>
+      <title>jenkins ldap auth</title>
+      <link>https://dxxzx.github.io/post/jenkins_ldap_auth/</link>
+      <pubDate>Fri, 10 Nov 2017 13:36:11 +0800</pubDate>
       
-      <guid>https://dxxzx.github.io/post/android_compilation_procedure/</guid>
-      <description> build/core/main.mk:108:include $(BUILD_SYSTEM)/config.mk build/core/config.mk:137:include $(BUILD_SYSTEM)/envsetup.mk build/core/config.mk:155:include $(board_config_mk) build/core/envsetup.mk:115:include $(BUILD_SYSTEM)/product_config.mk build/core/product_config.mk:179:include $(BUILD_SYSTEM)/product.mk build/core/product_config.mk:180:include $(BUILD_SYSTEM)/device.mk build/core/config.mk:45:SRC_TARGET_DIR := $(TOPDIR)build/target build/core/config.mk:139:# Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE) build/core/config.mk:145:$(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)/BoardConfig.mk \ build/core/product_config.mk:185:$(SRC_TARGET_DIR)/product/AndroidProducts.mk) build/core/product_config.mk:267:$(foreach runtime, $(product_runtimes), $(eval include $(SRC_TARGET_DIR)/product/$(runtime).mk)) build/core/product.mk:33:$(SRC_TARGET_DIR)/product/AndroidProducts.mk  </description>
+      <guid>https://dxxzx.github.io/post/jenkins_ldap_auth/</guid>
+      <description> Jenkins Authorize with LDAP Install LDAP plugin login to jenkins, go to Manage Jenkins -&amp;gt; Manage Plugins -&amp;gt; Available to install LDAP plugin.
+Configure LDAP plugin login to jenkins, go to Manage Jenkins -&amp;gt; Configure Global Security -&amp;gt; Access Coutrol to configure LDAP.
+ Server: &amp;lt;host name of ldap server&amp;gt;, possible value: 192.168.1.101, ldap.example.com root DN: usually be dc=my-domain,dc=com User search base: usually be ou=People User search filter: usually be uid={0} Manager DN: usually be cn=Manager,dc=my-domain,dc=com or cn=admin,dc=my-domain,dc=com Manager Password: Your Manager password Display Name LDAP attribute: usually be displayname Email Address LDAP attribute: usually be mail  </description>
     </item>
     
     <item>
-      <title>adjust window edge in amlogic android system with u-boot bootloader</title>
-      <link>https://dxxzx.github.io/post/preconfigured_window_edge/</link>
-      <pubDate>Tue, 12 Sep 2017 09:15:11 +0800</pubDate>
+      <title>openldap service establish guide</title>
+      <link>https://dxxzx.github.io/post/openldap_service/</link>
+      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
-      <guid>https://dxxzx.github.io/post/preconfigured_window_edge/</guid>
-      <description>configure window edge Related files  include/configs/gxl_p211_v1.h, line 145,  #define CONFIG_EXTRA_ENV_SETTINGS \ &amp;quot;firstboot=1\0&amp;quot;\ &amp;quot;upgrade_step=0\0&amp;quot;\ &amp;quot;jtag=apee\0&amp;quot;\ &amp;quot;loadaddr=1080000\0&amp;quot;\ &amp;quot;outputmode=720p50hz\0&amp;quot; \ &amp;quot;hdmimode=720p50hz\0&amp;quot; \ &amp;quot;cvbsmode=576cvbs\0&amp;quot; \ &amp;quot;1080p_h=1037\0&amp;quot; \ &amp;quot;1080p_w=1843\0&amp;quot; \ &amp;quot;1080p_x=38\0&amp;quot; \ &amp;quot;1080p_y=21\0&amp;quot; \ &amp;quot;1080i_h=1037\0&amp;quot; \ &amp;quot;1080i_w=1843\0&amp;quot; \ &amp;quot;1080i_x=38\0&amp;quot; \ &amp;quot;1080i_y=21\0&amp;quot; \ &amp;quot;720p_h=691\0&amp;quot; \ &amp;quot;720p_w=1222\0&amp;quot; \ &amp;quot;720p_x=32\0&amp;quot; \ &amp;quot;720p_y=14\0&amp;quot; \ &amp;quot;576p_h=545\0&amp;quot; \ &amp;quot;576p_w=680\0&amp;quot; \ &amp;quot;576p_x=20\0&amp;quot; \ &amp;quot;576p_y=15\0&amp;quot; \ &amp;quot;576i_h=545\0&amp;quot; \ &amp;quot;576i_w=680\0&amp;quot; \ &amp;quot;576i_x=20\0&amp;quot; \ &amp;quot;576i_y=15\0&amp;quot; \ &amp;quot;480p_h=433\0&amp;quot; \ &amp;quot;480p_w=649\0&amp;quot; \ &amp;quot;480p_x=35\0&amp;quot; \ &amp;quot;480p_y=23\0&amp;quot; \ &amp;quot;480i_h=433\0&amp;quot; \ &amp;quot;480i_w=649\0&amp;quot; \ &amp;quot;480i_x=35\0&amp;quot; \ &amp;quot;480i_y=23\0&amp;quot; \ &amp;quot;uimode=1080p\0&amp;quot; \ &amp;quot;display_width=1920\0&amp;quot; \ &amp;quot;display_height=1080\0&amp;quot; \ &amp;quot;display_bpp=16\0&amp;quot; \ .</description>
+      <guid>https://dxxzx.github.io/post/openldap_service/</guid>
+      <description>搭建ldap服务器 安装并启动服务 yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd  设置 OpenLDAP 的管理员密码 首先要生成经处理后的明文密码：
+# slappasswd New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8  其中 {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx 就是加密处理后的明文密码，之后会用到这个密码。 之后再新建如下文件:
+cat &amp;gt; chrootpw.ldif &amp;lt;&amp;lt; &amp;quot;EOF&amp;quot; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF  最后导入该文件：
+# ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif SASL/EXTERNAL authentication started SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth SASL SSF: 0 modifying entry &amp;quot;olcDatabase={0}config,cn=config&amp;quot;  导入基本 Schema（可以有选择的导入） cd /etc/openldap/schema/ ldapadd -Y EXTERNAL -H ldapi:/// -D &amp;quot;cn=config&amp;quot; -f cosine.</description>
     </item>
     
     <item>
-      <title>About</title>
-      <link>https://dxxzx.github.io/about/</link>
-      <pubDate>Mon, 11 Sep 2017 19:06:25 +0800</pubDate>
+      <title>ubuntu ldap auth</title>
+      <link>https://dxxzx.github.io/post/ubuntu_ldap_auth/</link>
+      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
-      <guid>https://dxxzx.github.io/about/</guid>
-      <description></description>
+      <guid>https://dxxzx.github.io/post/ubuntu_ldap_auth/</guid>
+      <description>ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts  某些配置条目可能如下：
+base dc=tianyisc,dc=com uri ldap://192.168.99.89/ binddn cn=Manager,dc=tianyisc,dc=com bindpw password rootbinddn cn=Manager,dc=tianyisc,dc=com  Now configure the LDAP profile for NSS:
+sudo auth-client-config -t nss -p lac_ldap  Configure the system to use LDAP for authentication:
+sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the package:
+&amp;gt; sudo apt install ldapscripts &amp;gt; ``` &amp;gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following: &amp;gt; ``` &amp;gt; SERVER=localhost &amp;gt; BINDDN=&#39;cn=admin,dc=example,dc=com&#39; &amp;gt; BINDPWDFILE=&amp;quot;/etc/ldapscripts/ldapscripts.</description>
+    </item>
+    
+    <item>
+      <title>understanding android build layer</title>
+      <link>https://dxxzx.github.io/post/understanding_build_layer/</link>
+      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/post/understanding_build_layer/</guid>
+      <description>理解构建层 先看看Android官方的解释
+ Understand Build Layers The build hierarchy includes the abstraction layers that correspond to the physical makeup of a device. These layers are described in the table below. Each layer relates to the one above it in a one-to-many relationship. For example, an architecture can have more than one board and each board can have more than one product. You may define an element in a given layer as a specialization of an element in the same layer, thus eliminating copying and simplifying maintenance.</description>
     </item>
     
     <item>
@@ -45,7 +64,7 @@
       <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>https://dxxzx.github.io/contact/</guid>
-      <description> First Name  Last Name  E-Mail  City  State AL CA IL      Send   </description>
+      <description>Email: dxx1104@gmail.com</description>
     </item>
     
   </channel>
