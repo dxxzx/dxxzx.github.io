@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.30.2" />
+
+  <title>gerrit service establish guide &middot; Dylan</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://dxxzx.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://dxxzx.github.io/">Blackburn</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/tags/"><i class='fa fa-tag fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
+    </li>
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
+    </li>
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/dxxzx" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://stackoverflow.com/users/*" target="_blank"><i class="fa fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2017. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>gerrit service establish guide</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>10 Nov 2017</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/gerrit">gerrit</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+
+<h1 id="gerrit服务器搭建">Gerrit服务器搭建</h1>
+
+<p>安装gerrit之前请确保mariadb服务和openldap服务已经安装并配置好，如果未安装，参考这里<a href="mariadb_server.md">mariadb服务器搭建</a>，<a href="openldap_service.md">openldap服务器搭建</a></p>
+
+<h2 id="init-gerrit-site">init gerrit site</h2>
+
+<p>using below command to init gerrit site</p>
+
+<pre><code class="language-sh">java -jar gerrit.war init -d gerrit-site
+</code></pre>
+
+<p>output may look like below:</p>
+
+<pre><code>Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore
+[2017-11-10 21:25:18,220] [main] INFO  com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults
+
+*** Gerrit Code Review 2.14.4
+*** 
+
+Create '/home/dylan/gerrit-site' [Y/n]? y
+</code></pre>
+
+<h3 id="git-repository-path-section">git repository path section</h3>
+
+<pre><code>*** Git Repositories
+*** 
+
+Location of Git repositories   [git]: 
+</code></pre>
+
+<h3 id="database-section">database section</h3>
+
+<p>before answer gerrit, you should create review database and mariadb for gerrit.
+execute below command in mysql prompt.</p>
+
+<pre><code class="language-sql">CREATE USER 'gerrit'@'localhost' IDENTIFIED BY 'secret';
+CREATE DATABASE reviewdb DEFAULT CHARACTER SET 'utf8';
+GRANT ALL ON reviewdb.* TO 'gerrit'@'localhost';
+FLUSH PRIVILEGES;
+</code></pre>
+
+<p>then, anwser question in gerrit installation</p>
+
+<pre><code>*** SQL Database
+*** 
+
+Database server type           [h2]: mariadb
+
+Gerrit Code Review is not shipped with MariaDB Connector/J 1.5.9
+**  This library is required for your configuration. **
+Download and install it now [Y/n]? y
+Downloading https://repo1.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/1.5.9/mariadb-java-client-1.5.9.jar ... OK
+Checksum mariadb-java-client-1.5.9.jar OK
+Server hostname                [localhost]: 
+Server port                    [(mariadb default)]: 
+Database name                  [reviewdb]: 
+Database username              [dylan]: gerrit
+gerrit's password              : 
+              confirm password : 
+</code></pre>
+
+<h3 id="index-type">index type</h3>
+
+<pre><code>*** Index
+*** 
+
+Type                           [lucene/?]: 
+</code></pre>
+
+<h3 id="authentication-section">authentication section</h3>
+
+<p>before anwser these question, please setup ldap service first. see <a href="openldap_service">openldap_service</a></p>
+
+<pre><code>*** User Authentication
+*** 
+
+Authentication method          [openid/?]: ldap
+Git/HTTP authentication        [http/?]: ldap
+LDAP server                    [ldap://localhost]: 
+LDAP username                  : cn=Manager,dc=my-domain,dc=com
+cn=Manager,dc=my-domain,dc=com's password : 
+              confirm password : 
+Account BaseDN                 : ou=People,dc=my-domain,dc=com
+Group BaseDN                   [ou=People,dc=my-domain,dc=com]: ou=Groups,dc=my-domain,dc=com
+Enable signed push support     [y/N]? y
+</code></pre>
+
+<h3 id="review-labels">review labels</h3>
+
+<pre><code>*** Review Labels
+*** 
+
+Install Verified label         [y/N]? y
+</code></pre>
+
+<h3 id="send-mail-setting">send mail setting</h3>
+
+<p>If your server could send out email, just leave these question as theirs default anwser.</p>
+
+<pre><code>*** Email Delivery
+*** 
+
+SMTP server hostname           [localhost]: 
+SMTP server port               [(default)]: 
+SMTP encryption                [none/?]: 
+SMTP username                  : 
+</code></pre>
+
+<h3 id="container-section">container section</h3>
+
+<p>if you run gerrit as a standalone user, please create this user first. If you run gerrit in tomcat container, fill it with tomcat</p>
+
+<pre><code>*** Container Process
+*** 
+
+Run as                         [dylan]: gerrit
+Java runtime                   [/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.144-7.b01.fc27.x86_64/jre]: 
+Copy gerrit-2.14.4.war to gerrit-site/bin/gerrit.war [Y/n]? 
+Copying gerrit-2.14.4.war to gerrit-site/bin/gerrit.war
+</code></pre>
+
+<h3 id="sshd-section">sshd section</h3>
+
+<p>just leave it as default.</p>
+
+<pre><code>*** SSH Daemon
+*** 
+
+Listen on address              [*]: 
+Listen on port                 [29418]: 
+Generating SSH host key ... rsa... dsa... ed25519... ecdsa 256... ecdsa 384... ecdsa 521... done
+</code></pre>
+
+<h3 id="httpd-section">httpd section</h3>
+
+<pre><code>*** HTTP Daemon
+*** 
+
+Behind reverse proxy           [y/N]? 
+Use SSL (https://)             [y/N]? 
+Listen on address              [*]: 
+Listen on port                 [8080]: 
+Canonical URL                  [http://176.74.176.187:8080/]: 
+</code></pre>
+
+<h3 id="cache">cache</h3>
+
+<pre><code>*** Cache
+*** 
+</code></pre>
+
+<h3 id="plugins">plugins</h3>
+
+<pre><code>*** Plugins
+*** 
+
+Installing plugins.
+Install plugin commit-message-length-validator version v2.14.4 [y/N]? y
+Installed commit-message-length-validator v2.14.4
+Install plugin download-commands version v2.14.4 [y/N]? y
+Installed download-commands v2.14.4
+Install plugin hooks version v2.14.4 [y/N]? y
+Installed hooks v2.14.4
+Install plugin replication version v2.14.4 [y/N]? y
+Installed replication v2.14.4
+Install plugin reviewnotes version v2.14.4 [y/N]? y
+Installed reviewnotes v2.14.4
+Install plugin singleusergroup version v2.14.4 [y/N]? y
+Installed singleusergroup v2.14.4
+Initializing plugins.
+</code></pre>
+
+<h2 id="run-gerrit-in-tomcat-container">run gerrit in tomcat container</h2>
+
+<h3 id="init-gerrit-site-1">init gerrit site</h3>
+
+<p>as last section <a href="#init-gerrit-site">init gerrit site</a></p>
+
+<h3 id="deploy-gerrit-war">deploy gerrit.war</h3>
+
+<p>generally, you can just copy gerrit.war to path <em>/var/lib/tomcat/webapps/</em>, tomcat will deploy it automaticlly.
+after deployment, you should modify file content of <em>gerrit-launcher/workspace-root.txt</em> under your gerrit app directory, let its content point to gerrit site path.</p>
+
+<pre><code>/home/dylan/gerrit-site
+</code></pre>
+
+<h3 id="configure-gerrit-app-context">configure gerrit app context</h3>
+
+<p>add below content to tomcat config file <em>server.xml</em>, element Host.</p>
+
+<pre><code class="language-xml">&lt;Context path=&quot;/gerrit&quot; docBase=&quot;/var/lib/tomcat/webapps/gerrit&quot; reloadable=&quot;true&quot;&gt;
+    &lt;Resource
+        name=&quot;jdbc/ReviewDb&quot;
+        type=&quot;javax.sql.DataSource&quot;
+        driverClassName=&quot;org.mariadb.jdbc.Driver&quot;
+        username=&quot;root&quot;
+        password=&quot;password&quot;
+        maxWait=&quot;10000&quot;
+        maxIdle=&quot;30&quot;
+        maxActive=&quot;100&quot;
+        url=&quot;jdbc:mariadb://localhost:3306/ReviewDB?autoReconnect=true&quot;
+        auth=&quot;Container&quot; /&gt;
+&lt;/Context&gt;
+</code></pre>
+
+<h3 id="restart-tomcat">restart tomcat</h3>
+
+<pre><code class="language-sh">systemctl restart tomcat
+</code></pre>
+
+<h2 id="a-gerrit-config-sample">a gerrit config sample</h2>
+
+<pre><code>[gerrit]
+	basePath = /var/lib/gerrit
+	serverId = 408f5af4-fcd0-4e39-823a-5b83a514e542
+	canonicalWebUrl = http://192.168.99.89:8080/gerrit/
+[database]
+	type = mariadb
+	database = reviewdb
+	hostname = localhost
+	username = gerrit
+[index]
+	type = LUCENE
+[download]
+	command = checkout
+	command = cherry_pick
+	command = pull
+	command = format_patch
+	scheme = ssh
+[auth]
+	type = LDAP
+	gitBasicAuthPolicy = LDAP
+[gc]
+	startTime = 1:00
+	interval = 1 w
+[gitweb]
+	project = ?p=${project}
+	branch = ?p=${project}
+	revision = ?p=${project}
+	filehistory = ?p=${project}
+	roottree = ?p=${project}
+	file = ?p=${project}
+[changeCleanup]
+	startTime = 4:00
+	interval = 1 w
+[ldap]
+	server = ldap://127.0.0.1
+	username = cn=Manager,dc=tianyisc,dc=com
+	accountBase = ou=People,dc=tianyisc,dc=com
+	accountPattern = (&amp;(objectClass=person)(uid=${username}))
+	accountFullName = displayName
+	accountEmailAddress = mail
+	groupBase = ou=Groups,dc=tianyisc,dc=com
+	groupMemberPattern = (&amp;(objectClass=group)(member=${dn}))
+[sendemail]
+	smtpServer = smtp.mxhichina.com
+	smtpSeverPort = 25
+	smtpEncryption = ssl
+	smtpUser = gerrit@tianyisc.com
+	sslVerify = false
+	from = Gerrit Review &lt;gerrit@tianyisc.com&gt;
+[receive]
+	enableSignedPush = true
+[container]
+	user = tomcat
+	javaHome = /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.144-0.b01.el7_4.x86_64/jre
+[automerge]
+	botEmail = gerrit@tianyisc.com
+[commentlink &quot;change&quot;]
+	match = &quot;#/c/(\\d+)&quot;
+	html = &quot;&lt;a href=\&quot;/#/c/$1/\&quot;&gt;$1&lt;/a&gt;&quot;
+[sshd]
+	listenAddress = *:29418
+[httpd]
+	listenUrl = http://*:8080
+[cache]
+	directory = /var/cache/gerrit
+[commitmessage]
+	rejectTooLong = true
+[plugins]
+	allowRemoteAdmin = true
+</code></pre>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://dxxzx.github.io/post/openldap_service/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://dxxzx.github.io/post/openldap_service/">openldap service establish guide</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://dxxzx.github.io/post/jenkins_ldap_auth/">jenkins ldap auth</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://dxxzx.github.io/post/jenkins_ldap_auth/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'Your Disqus shortname';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="https://dxxzx.github.io/js/ui.js"></script>
+
+
+
+
+</body>
+</html>
+

@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://dxxzx.github.io/post/gerrit_server/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://dxxzx.github.io/post/openldap_service/</loc>
     <lastmod>2017-11-10T11:34:11+08:00</lastmod>
   </url>
@@ -47,6 +52,12 @@
   <url>
     <loc>https://dxxzx.github.io/</loc>
     <lastmod>2017-11-10T13:36:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/tags/gerrit/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
