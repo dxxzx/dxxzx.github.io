@@ -6,8 +6,8 @@ tags: [gerrit]
 description: ""
 ---
 
-# Gerrit服务器搭建
-安装gerrit之前请确保mariadb服务和openldap服务已经安装并配置好，如果未安装，参考这里[mariadb服务器搭建](mariadb_server.md)，[openldap服务器搭建](openldap_service.md)
+# Gerrit server establish
+Before install gerrit, please ensure mariadb service and openldap service are installed and configured. If not yet, please refer [mariadb server establish](mariadb_server.md), [openldap server establish](openldap_service.md).
 ## init gerrit site
 using below command to init gerrit site
 ```sh

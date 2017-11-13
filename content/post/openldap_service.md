@@ -6,8 +6,8 @@ tags: [openldap,ldap]
 description: ""
 ---
 
-# 搭建ldap服务器
-## 安装并启动服务
+# establish openldap server
+## Install and start service
 ```sh
 yum install openldap-servers openldap-clients
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
@@ -15,8 +15,8 @@ chown ldap. /var/lib/ldap/DB_CONFIG
 systemctl start slapd
 systemctl enable slapd
 ```
-## 设置 OpenLDAP 的管理员密码 
-首先要生成经处理后的明文密码：
+## setup OpenLDAP manager password
+generate encrptyed password:
 ```sh
 # slappasswd    
 New password:   
@@ -24,8 +24,8 @@ Re-enter new password:
 {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
 ```
 
-其中 {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx 就是加密处理后的明文密码，之后会用到这个密码。 
-之后再新建如下文件: 
+string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later. 
+then, create file like below. 
 
 ```sh
 cat > chrootpw.ldif << "EOF"
@@ -35,13 +35,13 @@ add: olcRootPW
 olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
 EOF
 ```
-最后导入该文件：
+import this file:
 ```sh
 # ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif  
 SASL/EXTERNAL authentication started  
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth  
 SASL SSF: 0  
-modifying entry "olcDatabase={0}config,cn=config"  
+modifying entry "olcDatabase={0}config,cn=config"
 ```
 
 ## 导入基本 Schema（可以有选择的导入）
@@ -63,7 +63,7 @@ ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f pmi.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f ppolicy.ldif
 ```
 
-## 设置自己的 Domain Name
+## 设置自己的Domain Name
 首先要生成经处理后的目录管理者明文密码：
 ```sh
 # slappasswd  
