@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.30.2" />
+  <meta name="generator" content="Hugo 0.31" />
 
   <title>Dylan</title>
 
@@ -284,6 +284,51 @@ Configure LDAP plugin login to jenkins, go to Manage Jenkins -&gt; Configure Glo
   
     <article>
   <header>
+    <h2><a href="https://dxxzx.github.io/post/project_structure/">android source directory structure</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>10 Nov 2017</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/platform">platform</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  abi &ndash;This folder contains a sub folder called cpp which actually contains many C++ files linked to many places. art &ndash;it is the folder that deals with the compilation of the latest android ART runtime. If you&rsquo;re looking into source directories of some other android versions, you won&rsquo;t fins it obviously bionic &ndash;the C-runtime for Android. Note that Android is not using glibc like most Linux distributions. Instead the c-library is called bionic and is based mostly on BSD-derived sources.
+  </p>
+
+  
+  <footer>
+    <a href="https://dxxzx.github.io/post/project_structure/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
     <h2><a href="https://dxxzx.github.io/post/gerrit_server/">gerrit service establish guide</a></h2>
 
     <div class="post-meta">
@@ -314,10 +359,10 @@ Configure LDAP plugin login to jenkins, go to Manage Jenkins -&gt; Configure Glo
   </header>
 
   <p>
-  Gerrit服务器搭建 安装gerrit之前请确保mariadb服务和openldap服务已经安装并配置好，如果未安装，参考这里mariadb服务器搭建，openldap服务器搭建
+  Gerrit server establish Before install gerrit, please ensure mariadb service and openldap service are installed and configured. If not yet, please refer mariadb server establish, openldap server establish.
 init gerrit site using below command to init gerrit site
 java -jar gerrit.war init -d gerrit-site  output may look like below:
-Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [2017-11-10 21:25:18,220] [main] INFO com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults *** Gerrit Code Review 2.14.4 *** Create '/home/dylan/gerrit-site' [Y/n]? y  git repository path section *** Git Repositories *** Location of Git repositories [git]:  database section before answer gerrit, you should create review database and mariadb for gerrit.
+Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [2017-11-10 21:25:18,220] [main] INFO com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults *** Gerrit Code Review 2.14.4 *** Create '/home/dylan/gerrit-site' [Y/n]?
   </p>
 
   
@@ -362,10 +407,9 @@ Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [201
   </header>
 
   <p>
-  搭建ldap服务器 安装并启动服务 yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd  设置 OpenLDAP 的管理员密码 首先要生成经处理后的明文密码：
-# slappasswd New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8  其中 {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx 就是加密处理后的明文密码，之后会用到这个密码。 之后再新建如下文件:
-cat &gt; chrootpw.ldif &lt;&lt; &quot;EOF&quot; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF  最后导入该文件：
-# ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif SASL/EXTERNAL authentication started SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth SASL SSF: 0 modifying entry &quot;olcDatabase={0}config,cn=config&quot;  导入基本 Schema（可以有选择的导入） cd /etc/openldap/schema/ ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f cosine.
+  establish openldap server Install and start service yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd  setup OpenLDAP manager password generate encrptyed password:
+# slappasswd New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8  string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later. then, create file like below.
+cat &gt; chrootpw.ldif &lt;&lt; &quot;EOF&quot; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF  import this file:
   </p>
 
   
@@ -480,6 +524,8 @@ sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the packag
 </div>
 </div>
 <script src="https://dxxzx.github.io/js/ui.js"></script>
+
+
 
 
 

@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://dxxzx.github.io/post/project_structure/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://dxxzx.github.io/post/gerrit_server/</loc>
     <lastmod>2017-11-10T11:34:11+08:00</lastmod>
   </url>
@@ -75,6 +80,12 @@
   
   <url>
     <loc>https://dxxzx.github.io/tags/openldap/</loc>
+    <lastmod>2017-11-10T11:34:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dxxzx.github.io/tags/platform/</loc>
     <lastmod>2017-11-10T11:34:11+08:00</lastmod>
     <priority>0</priority>
   </url>

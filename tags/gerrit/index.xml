@@ -18,10 +18,10 @@
       <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
       <guid>https://dxxzx.github.io/post/gerrit_server/</guid>
-      <description>Gerrit服务器搭建 安装gerrit之前请确保mariadb服务和openldap服务已经安装并配置好，如果未安装，参考这里mariadb服务器搭建，openldap服务器搭建
+      <description>Gerrit server establish Before install gerrit, please ensure mariadb service and openldap service are installed and configured. If not yet, please refer mariadb server establish, openldap server establish.
 init gerrit site using below command to init gerrit site
 java -jar gerrit.war init -d gerrit-site  output may look like below:
-Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [2017-11-10 21:25:18,220] [main] INFO com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults *** Gerrit Code Review 2.14.4 *** Create &#39;/home/dylan/gerrit-site&#39; [Y/n]? y  git repository path section *** Git Repositories *** Location of Git repositories [git]:  database section before answer gerrit, you should create review database and mariadb for gerrit.</description>
+Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [2017-11-10 21:25:18,220] [main] INFO com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults *** Gerrit Code Review 2.14.4 *** Create &#39;/home/dylan/gerrit-site&#39; [Y/n]?</description>
     </item>
     
   </channel>

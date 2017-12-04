@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Android on Dylan</title>
-    <link>https://dxxzx.github.io/tags/android/</link>
-    <description>Recent content in Android on Dylan</description>
+    <title>Platform on Dylan</title>
+    <link>https://dxxzx.github.io/tags/platform/</link>
+    <description>Recent content in Platform on Dylan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
     <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate>
     
-	<atom:link href="https://dxxzx.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dxxzx.github.io/tags/platform/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,16 +19,6 @@
       
       <guid>https://dxxzx.github.io/post/project_structure/</guid>
       <description>abi &amp;ndash;This folder contains a sub folder called cpp which actually contains many C++ files linked to many places. art &amp;ndash;it is the folder that deals with the compilation of the latest android ART runtime. If you&amp;rsquo;re looking into source directories of some other android versions, you won&amp;rsquo;t fins it obviously bionic &amp;ndash;the C-runtime for Android. Note that Android is not using glibc like most Linux distributions. Instead the c-library is called bionic and is based mostly on BSD-derived sources.</description>
-    </item>
-    
-    <item>
-      <title>understanding android build layer</title>
-      <link>https://dxxzx.github.io/post/understanding_build_layer/</link>
-      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
-      
-      <guid>https://dxxzx.github.io/post/understanding_build_layer/</guid>
-      <description>理解构建层 先看看Android官方的解释
- Understand Build Layers The build hierarchy includes the abstraction layers that correspond to the physical makeup of a device. These layers are described in the table below. Each layer relates to the one above it in a one-to-many relationship. For example, an architecture can have more than one board and each board can have more than one product. You may define an element in a given layer as a specialization of an element in the same layer, thus eliminating copying and simplifying maintenance.</description>
     </item>
     
   </channel>

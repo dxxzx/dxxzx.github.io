@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.31" />
 
-  <title>jenkins ldap auth &middot; Dylan</title>
+  <title>android source directory structure &middot; Dylan</title>
 
   
   
@@ -227,7 +227,7 @@
 
 
 <div class="header">
-  <h1>jenkins ldap auth</h1>
+  <h1>android source directory structure</h1>
   <h2></h2>
 </div>
 <div class="content">
@@ -249,9 +249,9 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/jenkins">jenkins</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/platform">platform</a>
     
   </div>
   
@@ -259,27 +259,33 @@
 
 </div>
 
-  
-
-<h1 id="jenkins-authorize-with-ldap">Jenkins Authorize with LDAP</h1>
-
-<h2 id="install-ldap-plugin">Install LDAP plugin</h2>
-
-<p>login to jenkins, go to <code>Manage Jenkins -&gt; Manage Plugins -&gt; Available</code> to install <code>LDAP plugin</code>.</p>
-
-<h2 id="configure-ldap-plugin">Configure LDAP plugin</h2>
-
-<p>login to jenkins, go to <code>Manage Jenkins -&gt; Configure Global Security -&gt; Access Coutrol</code> to configure LDAP.</p>
-
-<ul>
-<li>Server: &lt;host name of ldap server&gt;, possible value: <em>192.168.1.101</em>, <em>ldap.example.com</em></li>
-<li>root DN: usually be <em>dc=my-domain,dc=com</em></li>
-<li>User search base: usually be <em>ou=People</em></li>
-<li>User search filter: usually be <em>uid={0}</em></li>
-<li>Manager DN: usually be <em>cn=Manager,dc=my-domain,dc=com</em> or <em>cn=admin,dc=my-domain,dc=com</em></li>
-<li>Manager Password: Your Manager password</li>
-<li>Display Name LDAP attribute: usually be displayname</li>
-<li>Email Address LDAP attribute: usually be mail</li>
+  <ul>
+<li>abi &ndash;This folder contains a sub folder called cpp which actually contains many C++ files linked to many places.</li>
+<li>art &ndash;it is the folder that deals with the compilation of the latest android ART runtime. If you&rsquo;re looking into source directories of some other android versions, you won&rsquo;t fins it obviously</li>
+<li>bionic &ndash;the C-runtime for Android. Note that Android is not using glibc like most Linux distributions. Instead the c-library is called bionic and is based mostly on BSD-derived sources. In this folder you will find the source for the c-library, math and other core runtime libraries.</li>
+<li>bootable &ndash;boot and startup related code. Some of it is legacy, the fastboot protocol info could be interesting since it is implemented by boot loaders in a number of devices such as the Nexus ones.</li>
+<li>build &ndash;the build system implementation including all the core make file templates. An important file here is the envsetup.sh script that will help you a lot when working with the platform source. Running this script in a shell will enable commands to setup environment variables, build specific modules and grep in source code files.</li>
+<li>cts &ndash; the compatability tests. The test suite to ensure that a build complies with the Android specification.</li>
+<li>dalvik &ndash;the source code for the implementation of the Dalvik Virtual Machine</li>
+<li>developers &ndash;</li>
+<li>development &ndash;projects related to development such as the source code for the sdk and ndk tools. Normally not a folder you touch when working with the platform for a target.</li>
+<li>device &ndash;product specific code for different devices. This is the place to find hardware modules for the different Nexus devices, build configurations and more.</li>
+<li>docs &ndash;I contains an important sub-folder called source.android.com. Contains tutorials, references, and miscellaneous information relating to the Android Open Source Project (AOSP). The current iteration of this site is fully static HTML (notably lacking in javascript and doxygen content), and is and/or was maintained by skyler (illustrious intern under Dan Morrill and assistant to the almighty JBQ).</li>
+<li>external &ndash;contains source code for all external open source projects such as SQLite, Freetype and webkit.</li>
+<li>frameworks &ndash;this folder is essential to Android since it contains the sources for the framework. Here you will find the implementation of key services such as the System Server with the Package- and Activity managers. A lot of the mapping between the java application APIs and the native libraries is also done here.</li>
+<li>hardware &ndash;hardware related source code such as the Android hardware abstraction layer specification and implementation. This folder also contains the reference radio interface layer (to communicate with the modem side) implementation.</li>
+<li>libcore &ndash;Apache Harmony.</li>
+<li>libnativehelper &ndash;Helper functions for use with JNI.</li>
+<li>Makefile &ndash;Makefile, build/core/root.mk</li>
+<li>ndk &ndash;native development kit</li>
+<li>out - the build output will be placed here after you run make. The folder structure is out/target/product/. In the default build for the emulator the output will be placed in out/target/product/generic. This is where you will find the images used by the emulator to start (or to be downloaded and flashed to a device if you are building for a hardware target).</li>
+<li>packages &ndash;contains the source code for the default applications such as contacts, calendar, browser.</li>
+<li>pdk &ndash; I believe that &lsquo;pdk&rsquo; is the Platform Development Kit, it&rsquo;s basically an SDK/set of tools that Google sends to OEMs to evaluate their framework ahead of each major Android upgrade since Android 4.1.</li>
+<li>prebuilts &ndash;contains files that are distributed in binary form for convenience. Examples include the cross compilations toolchains for different development machines.</li>
+<li>sdk &ndash;This directory contains lots of apps that are not part of operating system. There are quite useful apps that developers can leverage on and can be enhanced further as part of the operating system.</li>
+<li>system &ndash;source code files for the core Android system. That is the minimal Linux system that is started before the Dalvik VM and any java based services are enabled. This includes the source code for the init process and the default init.rc script that provide the dynamic configuration of the platform</li>
+<li>tools &ndash;Various IDE tools.</li>
+<li>vendor &ndash;This directory contains vendors specific libraries. Most of the proprietary binary libraries from non-open source projects are stored here when building AOSP.</li>
 </ul>
 
 
@@ -287,13 +293,13 @@
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://dxxzx.github.io/post/project_structure/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://dxxzx.github.io/post/gerrit_server/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://dxxzx.github.io/post/project_structure/">android source directory structure</a>
+      <a href="https://dxxzx.github.io/post/gerrit_server/">gerrit service establish guide</a>
     </nav>
     
   </div>
@@ -302,8 +308,14 @@
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="https://dxxzx.github.io/post/jenkins_ldap_auth/">jenkins ldap auth</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://dxxzx.github.io/post/jenkins_ldap_auth/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

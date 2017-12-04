@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.30.2" />
+  <meta name="generator" content="Hugo 0.31" />
 
   <title>openldap service establish guide &middot; Dylan</title>
 
@@ -261,9 +261,9 @@
 
   
 
-<h1 id="搭建ldap服务器">搭建ldap服务器</h1>
+<h1 id="establish-openldap-server">establish openldap server</h1>
 
-<h2 id="安装并启动服务">安装并启动服务</h2>
+<h2 id="install-and-start-service">Install and start service</h2>
 
 <pre><code class="language-sh">yum install openldap-servers openldap-clients
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
@@ -272,9 +272,9 @@ systemctl start slapd
 systemctl enable slapd
 </code></pre>
 
-<h2 id="设置-openldap-的管理员密码">设置 OpenLDAP 的管理员密码</h2>
+<h2 id="setup-openldap-manager-password">setup OpenLDAP manager password</h2>
 
-<p>首先要生成经处理后的明文密码：</p>
+<p>generate encrptyed password:</p>
 
 <pre><code class="language-sh"># slappasswd    
 New password:   
@@ -282,8 +282,8 @@ Re-enter new password:
 {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
 </code></pre>
 
-<p>其中 {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx 就是加密处理后的明文密码，之后会用到这个密码。
-之后再新建如下文件:</p>
+<p>string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later.
+then, create file like below.</p>
 
 <pre><code class="language-sh">cat &gt; chrootpw.ldif &lt;&lt; &quot;EOF&quot;
 dn: olcDatabase={0}config,cn=config
@@ -293,13 +293,13 @@ olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
 EOF
 </code></pre>
 
-<p>最后导入该文件：</p>
+<p>import this file:</p>
 
 <pre><code class="language-sh"># ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif  
 SASL/EXTERNAL authentication started  
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth  
 SASL SSF: 0  
-modifying entry &quot;olcDatabase={0}config,cn=config&quot;  
+modifying entry &quot;olcDatabase={0}config,cn=config&quot;
 </code></pre>
 
 <h2 id="导入基本-schema-可以有选择的导入">导入基本 Schema（可以有选择的导入）</h2>
@@ -320,7 +320,7 @@ ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f pmi.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f ppolicy.ldif
 </code></pre>
 
-<h2 id="设置自己的-domain-name">设置自己的 Domain Name</h2>
+<h2 id="设置自己的domain-name">设置自己的Domain Name</h2>
 
 <p>首先要生成经处理后的目录管理者明文密码：</p>
 
@@ -493,6 +493,8 @@ firewall-cmd --reload                                                   # 重新
 </div>
 </div>
 <script src="https://dxxzx.github.io/js/ui.js"></script>
+
+
 
 
 
