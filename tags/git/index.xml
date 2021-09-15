@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Dylan</title>
+    <link>https://dxxzx.github.io/tags/git/</link>
+    <description>Recent content in git on Dylan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate><atom:link href="https://dxxzx.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>git usage guide</title>
+      <link>https://dxxzx.github.io/post/git_tutorials/</link>
+      <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/post/git_tutorials/</guid>
+      <description>Git使用指南 基本配置 开始使用git之前一般需要配置两个项目，操作命令如下：
+git config --global user.name &amp;#34;Dylan Deng&amp;#34; git config --global user.email &amp;#34;dengxingxian@tianyisc.com&amp;#34; 分别把两行命令中引号里的内容改成你自己的名字和邮箱。
+一些使用案例 git checkout -b neimengv1.0 neimengv1.0 # 取得tag`neimengv1.0`的内容并创建为本地分支neimengv1.0 git checkout -b master origin/master # 取得master分支的内容并创建为本地分支master git fetch origin refs/changes/34/34/1 &amp;amp;&amp;amp; git checkout -b change-34 refs/changes/34/34/1 # 取得编号为34的改动的内容并创建为本地分支change-34 git push origin HEAD:refs/for/common # 上传当前提交到代码审阅，审阅通过会合并到common分支 初始化仓库 获得远程仓库 git clone &amp;lt;repository_url&amp;gt; [-b &amp;lt;branch_name&amp;gt;] [directory] repository_url为远程仓库地址，为必须参数。 -b 此选项为可选参数，如果不提供这个参数，下载完成之后默认检出master分支。 directory 为可选参数，如果不提供这个参数，git会根据url，在当前路径创建一个与仓库同名文件夹，然后将仓库克隆到此文件夹。 example:
+git clone ssh://dylan@192.168.99.89:29418/aml_02 -b common aml_02 初始化本地仓库 如果远程仓库不存在或者远程仓库存在但是为空的，我们需要在本地创建一个git仓库然后上传到远程。操作过程如下：</description>
+    </item>
+    
+  </channel>
+</rss>

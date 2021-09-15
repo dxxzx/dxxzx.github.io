@@ -5,9 +5,9 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.31" />
+  <meta name="generator" content="Hugo 0.88.1" />
 
-  <title>Android &middot; Dylan</title>
+  <title>android &middot; Dylan</title>
 
   
   
@@ -123,21 +123,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
-    </li>
-    
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
-    </li>
-    
-
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
-    </li>
     
 
     
@@ -153,9 +139,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
-    </li>
+
     
 
     
@@ -233,10 +217,56 @@
 
 
 <div class="header">
-  <h1>Android</h1>
+  <h1>android</h1>
 </div>
 
 <div class="content">
+  
+    <article>
+  <header>
+    <h2><a href="https://dxxzx.github.io/post/fedora_android/">Establish Android Build Environment Under Fedora 27</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>04 Dec 2017</time>
+  </div>
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/platform">platform</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/build">build</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  Establish Android Build Environment Under Fedora 27 Install required packages dnf install git-core gnupg flex bison gperf zip curl zlib-devel gcc-arm-linux-gnu gcc-c++-arm-linux-gnu ccache unzip java-1.8.0-openjdk-devel make automake autoconf python2 ncurses-compat-libs libstdc++.i686 Configure USB Access 
+  </p>
+
+  
+</article>
+
   
     <article>
   <header>
@@ -325,6 +355,45 @@
   <footer>
     <a href="https://dxxzx.github.io/post/understanding_build_layer/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://dxxzx.github.io/post/android_compilation_procedure/">understanding android compiling progress</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>12 Sep 2017</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+   build/core/main.mk:108:include $(BUILD_SYSTEM)/config.mk build/core/config.mk:137:include $(BUILD_SYSTEM)/envsetup.mk build/core/config.mk:155:include $(board_config_mk) build/core/envsetup.mk:115:include $(BUILD_SYSTEM)/product_config.mk build/core/product_config.mk:179:include $(BUILD_SYSTEM)/product.mk build/core/product_config.mk:180:include $(BUILD_SYSTEM)/device.mk build/core/config.mk:45:SRC_TARGET_DIR := $(TOPDIR)build/target build/core/config.mk:139:# Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE) build/core/config.mk:145: $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)/BoardConfig.mk \ build/core/product_config.mk:185: $(SRC_TARGET_DIR)/product/AndroidProducts.mk) build/core/product_config.mk:267:$(foreach runtime, $(product_runtimes), $(eval include $(SRC_TARGET_DIR)/product/$(runtime).mk)) build/core/product.mk:33: $(SRC_TARGET_DIR)/product/AndroidProducts.mk  
+  </p>
+
   
 </article>
 

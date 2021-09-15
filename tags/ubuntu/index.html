@@ -5,9 +5,9 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.31" />
+  <meta name="generator" content="Hugo 0.88.1" />
 
-  <title>Ubuntu &middot; Dylan</title>
+  <title>ubuntu &middot; Dylan</title>
 
   
   
@@ -123,21 +123,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
-    </li>
-    
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
-    </li>
-    
-
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
-    </li>
     
 
     
@@ -153,9 +139,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
-    </li>
+
     
 
     
@@ -233,7 +217,7 @@
 
 
 <div class="header">
-  <h1>Ubuntu</h1>
+  <h1>ubuntu</h1>
 </div>
 
 <div class="content">
@@ -272,11 +256,12 @@
   </header>
 
   <p>
-  ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts  某些配置条目可能如下：
-base dc=tianyisc,dc=com uri ldap://192.168.99.89/ binddn cn=Manager,dc=tianyisc,dc=com bindpw password rootbinddn cn=Manager,dc=tianyisc,dc=com  Now configure the LDAP profile for NSS:
-sudo auth-client-config -t nss -p lac_ldap  Configure the system to use LDAP for authentication:
-sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the package:
-&gt; sudo apt install ldapscripts &gt; ``` &gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following: &gt; ``` &gt; SERVER=localhost &gt; BINDDN='cn=admin,dc=example,dc=com' &gt; BINDPWDFILE=&quot;/etc/ldapscripts/ldapscripts.
+  ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts 某些配置条目可能如下：
+base dc=tianyisc,dc=comuri ldap://192.168.99.89/binddn cn=Manager,dc=tianyisc,dc=combindpw passwordrootbinddn cn=Manager,dc=tianyisc,dc=com Now configure the LDAP profile for NSS:
+sudo auth-client-config -t nss -p lac_ldap Configure the system to use LDAP for authentication:
+sudo pam-auth-update 添加用户 ldapscript（方式一）  Install the package:
+sudo apt install ldapscripts Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following:
+SERVER=localhostBINDDN='cn=admin,dc=example,dc=com'BINDPWDFILE=&quot;/etc/ldapscripts/ldapscripts.passwd&quot;SUFFIX='dc=example,dc=com'GSUFFIX='ou=Groups'USUFFIX='ou=People'MSUFFIX='ou=Computers'GIDSTART=10000UIDSTART=10000MIDSTART=10000Now, create the ldapscripts.
   </p>
 
   

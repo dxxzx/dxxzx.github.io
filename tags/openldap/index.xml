@@ -1,26 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Openldap on Dylan</title>
+    <title>openldap on Dylan</title>
     <link>https://dxxzx.github.io/tags/openldap/</link>
-    <description>Recent content in Openldap on Dylan</description>
+    <description>Recent content in openldap on Dylan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate>
-    
-	<atom:link href="https://dxxzx.github.io/tags/openldap/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate><atom:link href="https://dxxzx.github.io/tags/openldap/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>openldap service establish guide</title>
       <link>https://dxxzx.github.io/post/openldap_service/</link>
       <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
       <guid>https://dxxzx.github.io/post/openldap_service/</guid>
-      <description>establish openldap server Install and start service yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd  setup OpenLDAP manager password generate encrptyed password:
-# slappasswd New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8  string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later. then, create file like below.
-cat &amp;gt; chrootpw.ldif &amp;lt;&amp;lt; &amp;quot;EOF&amp;quot; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF  import this file:</description>
+      <description>establish openldap server Install and start service yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd setup OpenLDAP manager password generate encrptyed password:
+# slappasswd  New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later. then, create file like below.
+cat &amp;gt; chrootpw.ldif &amp;lt;&amp;lt; &amp;#34;EOF&amp;#34; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF import this file:</description>
     </item>
     
   </channel>

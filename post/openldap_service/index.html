@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.31" />
+  <meta name="generator" content="Hugo 0.88.1" />
 
   <title>openldap service establish guide &middot; Dylan</title>
 
@@ -117,21 +117,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
-    </li>
-    
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
-    </li>
-    
-
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
-    </li>
     
 
     
@@ -147,9 +133,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
-    </li>
+
     
 
     
@@ -259,177 +243,138 @@
 
 </div>
 
-  
-
-<h1 id="establish-openldap-server">establish openldap server</h1>
-
+  <h1 id="establish-openldap-server">establish openldap server</h1>
 <h2 id="install-and-start-service">Install and start service</h2>
-
-<pre><code class="language-sh">yum install openldap-servers openldap-clients
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">yum install openldap-servers openldap-clients
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
 chown ldap. /var/lib/ldap/DB_CONFIG
 systemctl start slapd
 systemctl enable slapd
-</code></pre>
-
-<h2 id="setup-openldap-manager-password">setup OpenLDAP manager password</h2>
-
+</code></pre></div><h2 id="setup-openldap-manager-password">setup OpenLDAP manager password</h2>
 <p>generate encrptyed password:</p>
-
-<pre><code class="language-sh"># slappasswd    
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># slappasswd    </span>
 New password:   
 Re-enter new password:   
-{SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
-</code></pre>
-
-<p>string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later.
+<span style="color:#f92672">{</span>SSHA<span style="color:#f92672">}</span>2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
+</code></pre></div><p>string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later. 
 then, create file like below.</p>
-
-<pre><code class="language-sh">cat &gt; chrootpw.ldif &lt;&lt; &quot;EOF&quot;
-dn: olcDatabase={0}config,cn=config
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat &gt; chrootpw.ldif &lt;&lt; <span style="color:#e6db74">&#34;EOF&#34;</span>
+dn: olcDatabase<span style="color:#f92672">={</span>0<span style="color:#f92672">}</span>config,cn<span style="color:#f92672">=</span>config
 changetype: modify
 add: olcRootPW
-olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
+olcRootPW: <span style="color:#f92672">{</span>SSHA<span style="color:#f92672">}</span>2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
 EOF
-</code></pre>
-
-<p>import this file:</p>
-
-<pre><code class="language-sh"># ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif  
+</code></pre></div><p>import this file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif  </span>
 SASL/EXTERNAL authentication started  
-SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth  
-SASL SSF: 0  
-modifying entry &quot;olcDatabase={0}config,cn=config&quot;
-</code></pre>
-
-<h2 id="导入基本-schema-可以有选择的导入">导入基本 Schema（可以有选择的导入）</h2>
-
-<pre><code class="language-sh">cd /etc/openldap/schema/  
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f cosine.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f nis.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f collective.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f corba.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f core.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f duaconf.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f dyngroup.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f inetorgperson.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f java.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f misc.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f openldap.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f pmi.ldif
-ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f ppolicy.ldif
-</code></pre>
-
-<h2 id="设置自己的domain-name">设置自己的Domain Name</h2>
-
+SASL username: gidNumber<span style="color:#f92672">=</span>0+uidNumber<span style="color:#f92672">=</span>0,cn<span style="color:#f92672">=</span>peercred,cn<span style="color:#f92672">=</span>external,cn<span style="color:#f92672">=</span>auth  
+SASL SSF: <span style="color:#ae81ff">0</span>  
+modifying entry <span style="color:#e6db74">&#34;olcDatabase={0}config,cn=config&#34;</span>
+</code></pre></div><h2 id="导入基本-schema可以有选择的导入">导入基本 Schema（可以有选择的导入）</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd /etc/openldap/schema/  
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f cosine.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f nis.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f collective.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f corba.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f core.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f duaconf.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f dyngroup.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f inetorgperson.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f java.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f misc.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f openldap.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f pmi.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D <span style="color:#e6db74">&#34;cn=config&#34;</span> -f ppolicy.ldif
+</code></pre></div><h2 id="设置自己的domain-name">设置自己的Domain Name</h2>
 <p>首先要生成经处理后的目录管理者明文密码：</p>
-
-<pre><code class="language-sh"># slappasswd  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># slappasswd  </span>
 New password:   
 Re-enter new password:   
-{SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
-</code></pre>
-
-<p>之后，再新建如下文件，文件内容如下，注意，要使用你自己的域名替换掉文件中所有的 &ldquo;dc=<strong><em>,dc=</em></strong>&ldquo;，并且使用刚刚生成的密码，替换文中的 &ldquo;olcRootPW&rdquo; 部分：</p>
-
-<pre><code class="language-sh">cat &gt; chdomain.ldif &lt;&lt; &quot;EOF&quot;
-# replace to your own domain name for &quot;dc=***,dc=***&quot; section  
-# specify the password generated above for &quot;olcRootPW&quot; section  
-dn: olcDatabase={1}monitor,cn=config  
+<span style="color:#f92672">{</span>SSHA<span style="color:#f92672">}</span>2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8
+</code></pre></div><p>之后，再新建如下文件，文件内容如下，注意，要使用你自己的域名替换掉文件中所有的 &ldquo;dc=<em><strong>,dc=</strong></em>&quot;，并且使用刚刚生成的密码，替换文中的 &ldquo;olcRootPW&rdquo; 部分：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat &gt; chdomain.ldif &lt;&lt; <span style="color:#e6db74">&#34;EOF&#34;</span>
+<span style="color:#75715e"># replace to your own domain name for &#34;dc=***,dc=***&#34; section  </span>
+<span style="color:#75715e"># specify the password generated above for &#34;olcRootPW&#34; section  </span>
+dn: olcDatabase<span style="color:#f92672">={</span>1<span style="color:#f92672">}</span>monitor,cn<span style="color:#f92672">=</span>config  
 changetype: modify  
 replace: olcAccess  
-olcAccess: {0}to * by dn.base=&quot;gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth&quot;  
-  read by dn.base=&quot;cn=Manager,dc=tianyisc,dc=com&quot; read by * none  
+olcAccess: <span style="color:#f92672">{</span>0<span style="color:#f92672">}</span>to * by dn.base<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth&#34;</span>  
+  read by dn.base<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cn=Manager,dc=tianyisc,dc=com&#34;</span> read by * none  
   
-dn: olcDatabase={2}hdb,cn=config  
+dn: olcDatabase<span style="color:#f92672">={</span>2<span style="color:#f92672">}</span>hdb,cn<span style="color:#f92672">=</span>config  
 changetype: modify  
 replace: olcSuffix  
-olcSuffix: dc=tianyisc,dc=com  
+olcSuffix: dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com  
   
-dn: olcDatabase={2}hdb,cn=config  
+dn: olcDatabase<span style="color:#f92672">={</span>2<span style="color:#f92672">}</span>hdb,cn<span style="color:#f92672">=</span>config  
 changetype: modify  
 replace: olcRootDN  
-olcRootDN: cn=Manager,dc=tianyisc,dc=com  
+olcRootDN: cn<span style="color:#f92672">=</span>Manager,dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com  
   
-dn: olcDatabase={2}hdb,cn=config  
+dn: olcDatabase<span style="color:#f92672">={</span>2<span style="color:#f92672">}</span>hdb,cn<span style="color:#f92672">=</span>config  
 changetype: modify  
 add: olcRootPW  
-olcRootPW: {SSHA}ZhmO2UeH4tsyy5ly0fTwdkO10WJ69V6U  
+olcRootPW: <span style="color:#f92672">{</span>SSHA<span style="color:#f92672">}</span>ZhmO2UeH4tsyy5ly0fTwdkO10WJ69V6U  
   
-dn: olcDatabase={2}hdb,cn=config  
+dn: olcDatabase<span style="color:#f92672">={</span>2<span style="color:#f92672">}</span>hdb,cn<span style="color:#f92672">=</span>config  
 changetype: modify  
 add: olcAccess  
-olcAccess: {0}to attrs=userPassword,shadowLastChange by  
-  dn=&quot;cn=Manager,dc=tianyisc,dc=com&quot; write by anonymous auth by self write by * none  
-olcAccess: {1}to dn.base=&quot;&quot; by * read  
-olcAccess: {2}to * by dn=&quot;cn=Manager,dc=tianyisc,dc=com&quot; write by * read
+olcAccess: <span style="color:#f92672">{</span>0<span style="color:#f92672">}</span>to attrs<span style="color:#f92672">=</span>userPassword,shadowLastChange by  
+  dn<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cn=Manager,dc=tianyisc,dc=com&#34;</span> write by anonymous auth by self write by * none  
+olcAccess: <span style="color:#f92672">{</span>1<span style="color:#f92672">}</span>to dn.base<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> by * read  
+olcAccess: <span style="color:#f92672">{</span>2<span style="color:#f92672">}</span>to * by dn<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cn=Manager,dc=tianyisc,dc=com&#34;</span> write by * read
 EOF
-</code></pre>
-
-<p>之后再导入该文件：</p>
-
-<pre><code class="language-sh"># ldapmodify -Y EXTERNAL -H ldapi:/// -f chdomain.ldif    
+</code></pre></div><p>之后再导入该文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># ldapmodify -Y EXTERNAL -H ldapi:/// -f chdomain.ldif    </span>
 SASL/EXTERNAL authentication started  
-SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth  
-SASL SSF: 0  
-modifying entry &quot;olcDatabase={1}monitor,cn=config&quot;  
+SASL username: gidNumber<span style="color:#f92672">=</span>0+uidNumber<span style="color:#f92672">=</span>0,cn<span style="color:#f92672">=</span>peercred,cn<span style="color:#f92672">=</span>external,cn<span style="color:#f92672">=</span>auth  
+SASL SSF: <span style="color:#ae81ff">0</span>  
+modifying entry <span style="color:#e6db74">&#34;olcDatabase={1}monitor,cn=config&#34;</span>  
   
-modifying entry &quot;olcDatabase={2}hdb,cn=config&quot;  
+modifying entry <span style="color:#e6db74">&#34;olcDatabase={2}hdb,cn=config&#34;</span>  
   
-modifying entry &quot;olcDatabase={2}hdb,cn=config&quot;  
+modifying entry <span style="color:#e6db74">&#34;olcDatabase={2}hdb,cn=config&#34;</span>  
   
-modifying entry &quot;olcDatabase={2}hdb,cn=config&quot;  
+modifying entry <span style="color:#e6db74">&#34;olcDatabase={2}hdb,cn=config&#34;</span>  
   
-modifying entry &quot;olcDatabase={2}hdb,cn=config&quot;  
-</code></pre>
-
-<p>然后再新建如下文件,  文件内容如下，注意，要使用你自己的域名替换掉文件中所有的 &ldquo;dc=<strong><em>,dc=</em></strong>&ldquo;：</p>
-
-<pre><code class="language-sh">cat &gt; basedomain.ldif &lt;&lt; &quot;EOF&quot;
-dn: dc=tianyisc,dc=com
+modifying entry <span style="color:#e6db74">&#34;olcDatabase={2}hdb,cn=config&#34;</span>  
+</code></pre></div><p>然后再新建如下文件,  文件内容如下，注意，要使用你自己的域名替换掉文件中所有的 &ldquo;dc=<em><strong>,dc=</strong></em>&quot;：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat &gt; basedomain.ldif &lt;&lt; <span style="color:#e6db74">&#34;EOF&#34;</span>
+dn: dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com
 objectClass: top
 objectClass: dcObject
 objectClass: organization
 o: TianYi
 dc: tianyisc
 
-dn: ou=People,dc=tianyisc,dc=com
+dn: ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com
 objectClass: organizationalUnit
 ou: People
 
-dn: ou=Groups,dc=tianyisc,dc=com
+dn: ou<span style="color:#f92672">=</span>Groups,dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com
 objectClass: organizationalUnit
 ou: Groups
 
-dn: cn=developers,ou=Groups,dc=tianyisc,dc=com
+dn: cn<span style="color:#f92672">=</span>developers,ou<span style="color:#f92672">=</span>Groups,dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com
 objectClass: posixGroup
 cn: developers
-gidNumber: 5000
+gidNumber: <span style="color:#ae81ff">5000</span>
 EOF
-</code></pre>
-
-<p>最后导入该文件：</p>
-
-<pre><code class="language-sh"># ldapadd -x -D cn=Manager,dc=tianyisc,dc=com -W -f basedomain.ldif  
+</code></pre></div><p>最后导入该文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># ldapadd -x -D cn=Manager,dc=tianyisc,dc=com -W -f basedomain.ldif  </span>
 Enter LDAP Password:   
-adding new entry &quot;dc=tianyisc,dc=com&quot;  
+adding new entry <span style="color:#e6db74">&#34;dc=tianyisc,dc=com&#34;</span>  
   
-adding new entry &quot;cn=Manager,dc=tianyisc,dc=com&quot;  
+adding new entry <span style="color:#e6db74">&#34;cn=Manager,dc=tianyisc,dc=com&#34;</span>  
   
-adding new entry &quot;ou=People,dc=tianyisc,dc=com&quot;  
+adding new entry <span style="color:#e6db74">&#34;ou=People,dc=tianyisc,dc=com&#34;</span>  
   
-adding new entry &quot;ou=Group,dc=tianyisc,dc=com&quot;  
-</code></pre>
-
-<h2 id="允许防火墙访问-ldap-服务">允许防火墙访问 LDAP 服务</h2>
-
-<pre><code class="language-sh">firewall-cmd --zone=internal --add-source=192.168.99.0/24 --permanent   # 使用internal区域，并将ip范围加入internal区域
-firewall-cmd --zone=internal --add-service=ldap --permanent             # 允许ldap服务
-firewall-cmd --reload                                                   # 重新加载防火墙规则
-</code></pre>
-
-<p>references:</p>
-
+adding new entry <span style="color:#e6db74">&#34;ou=Group,dc=tianyisc,dc=com&#34;</span>  
+</code></pre></div><h2 id="允许防火墙访问-ldap-服务">允许防火墙访问 LDAP 服务</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">firewall-cmd --zone<span style="color:#f92672">=</span>internal --add-source<span style="color:#f92672">=</span>192.168.99.0/24 --permanent   <span style="color:#75715e"># 使用internal区域，并将ip范围加入internal区域</span>
+firewall-cmd --zone<span style="color:#f92672">=</span>internal --add-service<span style="color:#f92672">=</span>ldap --permanent             <span style="color:#75715e"># 允许ldap服务</span>
+firewall-cmd --reload                                                   <span style="color:#75715e"># 重新加载防火墙规则</span>
+</code></pre></div><p>references:</p>
 <ul>
 <li><a href="http://yhz61010.iteye.com/blog/2352672">[原创] CentOS7 下 OpenLDAP Server 安装和配置及使用 phpLDAPadmin 和 Java LDAP 访问 LDAP Server - Leo&rsquo;s Blog - ITeye博客</a></li>
 </ul>
@@ -455,13 +400,13 @@ firewall-cmd --reload                                                   # 重新
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://dxxzx.github.io/post/gerrit_server/">gerrit service establish guide</a>
+      <a href="https://dxxzx.github.io/post/git_tutorials/">git usage guide</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://dxxzx.github.io/post/gerrit_server/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://dxxzx.github.io/post/git_tutorials/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

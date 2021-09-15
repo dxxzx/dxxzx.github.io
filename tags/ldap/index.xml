@@ -1,24 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ldap on Dylan</title>
+    <title>ldap on Dylan</title>
     <link>https://dxxzx.github.io/tags/ldap/</link>
-    <description>Recent content in Ldap on Dylan</description>
+    <description>Recent content in ldap on Dylan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 10 Nov 2017 13:36:11 +0800</lastBuildDate>
-    
-	<atom:link href="https://dxxzx.github.io/tags/ldap/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 10 Nov 2017 13:36:11 +0800</lastBuildDate><atom:link href="https://dxxzx.github.io/tags/ldap/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>jenkins ldap auth</title>
       <link>https://dxxzx.github.io/post/jenkins_ldap_auth/</link>
       <pubDate>Fri, 10 Nov 2017 13:36:11 +0800</pubDate>
       
       <guid>https://dxxzx.github.io/post/jenkins_ldap_auth/</guid>
-      <description> Jenkins Authorize with LDAP Install LDAP plugin login to jenkins, go to Manage Jenkins -&amp;gt; Manage Plugins -&amp;gt; Available to install LDAP plugin.
+      <description>Jenkins Authorize with LDAP Install LDAP plugin login to jenkins, go to Manage Jenkins -&amp;gt; Manage Plugins -&amp;gt; Available to install LDAP plugin.
 Configure LDAP plugin login to jenkins, go to Manage Jenkins -&amp;gt; Configure Global Security -&amp;gt; Access Coutrol to configure LDAP.
  Server: &amp;lt;host name of ldap server&amp;gt;, possible value: 192.168.1.101, ldap.example.com root DN: usually be dc=my-domain,dc=com User search base: usually be ou=People User search filter: usually be uid={0} Manager DN: usually be cn=Manager,dc=my-domain,dc=com or cn=admin,dc=my-domain,dc=com Manager Password: Your Manager password Display Name LDAP attribute: usually be displayname Email Address LDAP attribute: usually be mail  </description>
     </item>
@@ -29,9 +25,9 @@ Configure LDAP plugin login to jenkins, go to Manage Jenkins -&amp;gt; Configure
       <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
       <guid>https://dxxzx.github.io/post/openldap_service/</guid>
-      <description>establish openldap server Install and start service yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd  setup OpenLDAP manager password generate encrptyed password:
-# slappasswd New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8  string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later. then, create file like below.
-cat &amp;gt; chrootpw.ldif &amp;lt;&amp;lt; &amp;quot;EOF&amp;quot; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF  import this file:</description>
+      <description>establish openldap server Install and start service yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd setup OpenLDAP manager password generate encrptyed password:
+# slappasswd  New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later. then, create file like below.
+cat &amp;gt; chrootpw.ldif &amp;lt;&amp;lt; &amp;#34;EOF&amp;#34; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF import this file:</description>
     </item>
     
     <item>
@@ -40,11 +36,12 @@ cat &amp;gt; chrootpw.ldif &amp;lt;&amp;lt; &amp;quot;EOF&amp;quot; dn: olcDatab
       <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
       <guid>https://dxxzx.github.io/post/ubuntu_ldap_auth/</guid>
-      <description>ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts  某些配置条目可能如下：
-base dc=tianyisc,dc=com uri ldap://192.168.99.89/ binddn cn=Manager,dc=tianyisc,dc=com bindpw password rootbinddn cn=Manager,dc=tianyisc,dc=com  Now configure the LDAP profile for NSS:
-sudo auth-client-config -t nss -p lac_ldap  Configure the system to use LDAP for authentication:
-sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the package:
-&amp;gt; sudo apt install ldapscripts &amp;gt; ``` &amp;gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following: &amp;gt; ``` &amp;gt; SERVER=localhost &amp;gt; BINDDN=&#39;cn=admin,dc=example,dc=com&#39; &amp;gt; BINDPWDFILE=&amp;quot;/etc/ldapscripts/ldapscripts.</description>
+      <description>ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts 某些配置条目可能如下：
+base dc=tianyisc,dc=comuri ldap://192.168.99.89/binddn cn=Manager,dc=tianyisc,dc=combindpw passwordrootbinddn cn=Manager,dc=tianyisc,dc=com Now configure the LDAP profile for NSS:
+sudo auth-client-config -t nss -p lac_ldap Configure the system to use LDAP for authentication:
+sudo pam-auth-update 添加用户 ldapscript（方式一）  Install the package:
+sudo apt install ldapscripts Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following:
+SERVER=localhostBINDDN=&#39;cn=admin,dc=example,dc=com&#39;BINDPWDFILE=&amp;quot;/etc/ldapscripts/ldapscripts.passwd&amp;quot;SUFFIX=&#39;dc=example,dc=com&#39;GSUFFIX=&#39;ou=Groups&#39;USUFFIX=&#39;ou=People&#39;MSUFFIX=&#39;ou=Computers&#39;GIDSTART=10000UIDSTART=10000MIDSTART=10000Now, create the ldapscripts.</description>
     </item>
     
   </channel>

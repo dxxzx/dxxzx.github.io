@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.31" />
+  <meta name="generator" content="Hugo 0.88.1" />
 
   <title>gerrit service establish guide &middot; Dylan</title>
 
@@ -117,21 +117,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
-    </li>
-    
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
-    </li>
-    
-
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
-    </li>
     
 
     
@@ -147,9 +133,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
-    </li>
+
     
 
     
@@ -257,52 +241,33 @@
 
 </div>
 
-  
-
-<h1 id="gerrit-server-establish">Gerrit server establish</h1>
-
+  <h1 id="gerrit-server-establish">Gerrit server establish</h1>
 <p>Before install gerrit, please ensure mariadb service and openldap service are installed and configured. If not yet, please refer <a href="mariadb_server.md">mariadb server establish</a>, <a href="openldap_service.md">openldap server establish</a>.</p>
-
 <h2 id="init-gerrit-site">init gerrit site</h2>
-
 <p>using below command to init gerrit site</p>
-
-<pre><code class="language-sh">java -jar gerrit.war init -d gerrit-site
-</code></pre>
-
-<p>output may look like below:</p>
-
-<pre><code>Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">java -jar gerrit.war init -d gerrit-site
+</code></pre></div><p>output may look like below:</p>
+<pre tabindex="0"><code>Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore
 [2017-11-10 21:25:18,220] [main] INFO  com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults
 
 *** Gerrit Code Review 2.14.4
 *** 
 
 Create '/home/dylan/gerrit-site' [Y/n]? y
-</code></pre>
-
-<h3 id="git-repository-path-section">git repository path section</h3>
-
-<pre><code>*** Git Repositories
+</code></pre><h3 id="git-repository-path-section">git repository path section</h3>
+<pre tabindex="0"><code>*** Git Repositories
 *** 
 
 Location of Git repositories   [git]: 
-</code></pre>
-
-<h3 id="database-section">database section</h3>
-
+</code></pre><h3 id="database-section">database section</h3>
 <p>before answer gerrit, you should create review database and mariadb for gerrit.
 execute below command in mysql prompt.</p>
-
-<pre><code class="language-sql">CREATE USER 'gerrit'@'localhost' IDENTIFIED BY 'secret';
-CREATE DATABASE reviewdb DEFAULT CHARACTER SET 'utf8';
-GRANT ALL ON reviewdb.* TO 'gerrit'@'localhost';
-FLUSH PRIVILEGES;
-</code></pre>
-
-<p>then, anwser question in gerrit installation</p>
-
-<pre><code>*** SQL Database
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">USER</span> <span style="color:#e6db74">&#39;gerrit&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;localhost&#39;</span> IDENTIFIED <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;secret&#39;</span>;
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> reviewdb <span style="color:#66d9ef">DEFAULT</span> CHARACTER <span style="color:#66d9ef">SET</span> <span style="color:#e6db74">&#39;utf8&#39;</span>;
+<span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">ALL</span> <span style="color:#66d9ef">ON</span> reviewdb.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;gerrit&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;localhost&#39;</span>;
+FLUSH <span style="color:#66d9ef">PRIVILEGES</span>;
+</code></pre></div><p>then, anwser question in gerrit installation</p>
+<pre tabindex="0"><code>*** SQL Database
 *** 
 
 Database server type           [h2]: mariadb
@@ -318,21 +283,14 @@ Database name                  [reviewdb]:
 Database username              [dylan]: gerrit
 gerrit's password              : 
               confirm password : 
-</code></pre>
-
-<h3 id="index-type">index type</h3>
-
-<pre><code>*** Index
+</code></pre><h3 id="index-type">index type</h3>
+<pre tabindex="0"><code>*** Index
 *** 
 
 Type                           [lucene/?]: 
-</code></pre>
-
-<h3 id="authentication-section">authentication section</h3>
-
+</code></pre><h3 id="authentication-section">authentication section</h3>
 <p>before anwser these question, please setup ldap service first. see <a href="openldap_service">openldap_service</a></p>
-
-<pre><code>*** User Authentication
+<pre tabindex="0"><code>*** User Authentication
 *** 
 
 Authentication method          [openid/?]: ldap
@@ -344,57 +302,39 @@ cn=Manager,dc=my-domain,dc=com's password :
 Account BaseDN                 : ou=People,dc=my-domain,dc=com
 Group BaseDN                   [ou=People,dc=my-domain,dc=com]: ou=Groups,dc=my-domain,dc=com
 Enable signed push support     [y/N]? y
-</code></pre>
-
-<h3 id="review-labels">review labels</h3>
-
-<pre><code>*** Review Labels
+</code></pre><h3 id="review-labels">review labels</h3>
+<pre tabindex="0"><code>*** Review Labels
 *** 
 
 Install Verified label         [y/N]? y
-</code></pre>
-
-<h3 id="send-mail-setting">send mail setting</h3>
-
+</code></pre><h3 id="send-mail-setting">send mail setting</h3>
 <p>If your server could send out email, just leave these question as theirs default anwser.</p>
-
-<pre><code>*** Email Delivery
+<pre tabindex="0"><code>*** Email Delivery
 *** 
 
 SMTP server hostname           [localhost]: 
 SMTP server port               [(default)]: 
 SMTP encryption                [none/?]: 
 SMTP username                  : 
-</code></pre>
-
-<h3 id="container-section">container section</h3>
-
+</code></pre><h3 id="container-section">container section</h3>
 <p>if you run gerrit as a standalone user, please create this user first. If you run gerrit in tomcat container, fill it with tomcat</p>
-
-<pre><code>*** Container Process
+<pre tabindex="0"><code>*** Container Process
 *** 
 
 Run as                         [dylan]: gerrit
 Java runtime                   [/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.144-7.b01.fc27.x86_64/jre]: 
 Copy gerrit-2.14.4.war to gerrit-site/bin/gerrit.war [Y/n]? 
 Copying gerrit-2.14.4.war to gerrit-site/bin/gerrit.war
-</code></pre>
-
-<h3 id="sshd-section">sshd section</h3>
-
+</code></pre><h3 id="sshd-section">sshd section</h3>
 <p>just leave it as default.</p>
-
-<pre><code>*** SSH Daemon
+<pre tabindex="0"><code>*** SSH Daemon
 *** 
 
 Listen on address              [*]: 
 Listen on port                 [29418]: 
 Generating SSH host key ... rsa... dsa... ed25519... ecdsa 256... ecdsa 384... ecdsa 521... done
-</code></pre>
-
-<h3 id="httpd-section">httpd section</h3>
-
-<pre><code>*** HTTP Daemon
+</code></pre><h3 id="httpd-section">httpd section</h3>
+<pre tabindex="0"><code>*** HTTP Daemon
 *** 
 
 Behind reverse proxy           [y/N]? 
@@ -402,17 +342,11 @@ Use SSL (https://)             [y/N]?
 Listen on address              [*]: 
 Listen on port                 [8080]: 
 Canonical URL                  [http://176.74.176.187:8080/]: 
-</code></pre>
-
-<h3 id="cache">cache</h3>
-
-<pre><code>*** Cache
+</code></pre><h3 id="cache">cache</h3>
+<pre tabindex="0"><code>*** Cache
 *** 
-</code></pre>
-
-<h3 id="plugins">plugins</h3>
-
-<pre><code>*** Plugins
+</code></pre><h3 id="plugins">plugins</h3>
+<pre tabindex="0"><code>*** Plugins
 *** 
 
 Installing plugins.
@@ -429,49 +363,32 @@ Installed reviewnotes v2.14.4
 Install plugin singleusergroup version v2.14.4 [y/N]? y
 Installed singleusergroup v2.14.4
 Initializing plugins.
-</code></pre>
-
-<h2 id="run-gerrit-in-tomcat-container">run gerrit in tomcat container</h2>
-
+</code></pre><h2 id="run-gerrit-in-tomcat-container">run gerrit in tomcat container</h2>
 <h3 id="init-gerrit-site-1">init gerrit site</h3>
-
 <p>as last section <a href="#init-gerrit-site">init gerrit site</a></p>
-
-<h3 id="deploy-gerrit-war">deploy gerrit.war</h3>
-
+<h3 id="deploy-gerritwar">deploy gerrit.war</h3>
 <p>generally, you can just copy gerrit.war to path <em>/var/lib/tomcat/webapps/</em>, tomcat will deploy it automaticlly.
 after deployment, you should modify file content of <em>gerrit-launcher/workspace-root.txt</em> under your gerrit app directory, let its content point to gerrit site path.</p>
-
-<pre><code>/home/dylan/gerrit-site
-</code></pre>
-
-<h3 id="configure-gerrit-app-context">configure gerrit app context</h3>
-
+<pre tabindex="0"><code>/home/dylan/gerrit-site
+</code></pre><h3 id="configure-gerrit-app-context">configure gerrit app context</h3>
 <p>add below content to tomcat config file <em>server.xml</em>, element Host.</p>
-
-<pre><code class="language-xml">&lt;Context path=&quot;/gerrit&quot; docBase=&quot;/var/lib/tomcat/webapps/gerrit&quot; reloadable=&quot;true&quot;&gt;
-    &lt;Resource
-        name=&quot;jdbc/ReviewDb&quot;
-        type=&quot;javax.sql.DataSource&quot;
-        driverClassName=&quot;org.mariadb.jdbc.Driver&quot;
-        username=&quot;root&quot;
-        password=&quot;password&quot;
-        maxWait=&quot;10000&quot;
-        maxIdle=&quot;30&quot;
-        maxActive=&quot;100&quot;
-        url=&quot;jdbc:mariadb://localhost:3306/ReviewDB?autoReconnect=true&quot;
-        auth=&quot;Container&quot; /&gt;
-&lt;/Context&gt;
-</code></pre>
-
-<h3 id="restart-tomcat">restart tomcat</h3>
-
-<pre><code class="language-sh">systemctl restart tomcat
-</code></pre>
-
-<h2 id="a-gerrit-config-sample">a gerrit config sample</h2>
-
-<pre><code>[gerrit]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;Context</span> <span style="color:#a6e22e">path=</span><span style="color:#e6db74">&#34;/gerrit&#34;</span> <span style="color:#a6e22e">docBase=</span><span style="color:#e6db74">&#34;/var/lib/tomcat/webapps/gerrit&#34;</span> <span style="color:#a6e22e">reloadable=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;Resource</span>
+        <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;jdbc/ReviewDb&#34;</span>
+        <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;javax.sql.DataSource&#34;</span>
+        <span style="color:#a6e22e">driverClassName=</span><span style="color:#e6db74">&#34;org.mariadb.jdbc.Driver&#34;</span>
+        <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;root&#34;</span>
+        <span style="color:#a6e22e">password=</span><span style="color:#e6db74">&#34;password&#34;</span>
+        <span style="color:#a6e22e">maxWait=</span><span style="color:#e6db74">&#34;10000&#34;</span>
+        <span style="color:#a6e22e">maxIdle=</span><span style="color:#e6db74">&#34;30&#34;</span>
+        <span style="color:#a6e22e">maxActive=</span><span style="color:#e6db74">&#34;100&#34;</span>
+        <span style="color:#a6e22e">url=</span><span style="color:#e6db74">&#34;jdbc:mariadb://localhost:3306/ReviewDB?autoReconnect=true&#34;</span>
+        <span style="color:#a6e22e">auth=</span><span style="color:#e6db74">&#34;Container&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/Context&gt;</span>
+</code></pre></div><h3 id="restart-tomcat">restart tomcat</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl restart tomcat
+</code></pre></div><h2 id="a-gerrit-config-sample">a gerrit config sample</h2>
+<pre tabindex="0"><code>[gerrit]
 	basePath = /var/lib/gerrit
 	serverId = 408f5af4-fcd0-4e39-823a-5b83a514e542
 	canonicalWebUrl = http://192.168.99.89:8080/gerrit/
@@ -542,18 +459,17 @@ after deployment, you should modify file content of <em>gerrit-launcher/workspac
 	allowRemoteAdmin = true
 </code></pre>
 
-
   
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://dxxzx.github.io/post/openldap_service/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://dxxzx.github.io/post/git_tutorials/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://dxxzx.github.io/post/openldap_service/">openldap service establish guide</a>
+      <a href="https://dxxzx.github.io/post/git_tutorials/">git usage guide</a>
     </nav>
     
   </div>

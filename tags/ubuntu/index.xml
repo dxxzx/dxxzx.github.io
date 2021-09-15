@@ -1,28 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ubuntu on Dylan</title>
+    <title>ubuntu on Dylan</title>
     <link>https://dxxzx.github.io/tags/ubuntu/</link>
-    <description>Recent content in Ubuntu on Dylan</description>
+    <description>Recent content in ubuntu on Dylan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate>
-    
-	<atom:link href="https://dxxzx.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate><atom:link href="https://dxxzx.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ubuntu ldap auth</title>
       <link>https://dxxzx.github.io/post/ubuntu_ldap_auth/</link>
       <pubDate>Fri, 10 Nov 2017 11:34:11 +0800</pubDate>
       
       <guid>https://dxxzx.github.io/post/ubuntu_ldap_auth/</guid>
-      <description>ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts  某些配置条目可能如下：
-base dc=tianyisc,dc=com uri ldap://192.168.99.89/ binddn cn=Manager,dc=tianyisc,dc=com bindpw password rootbinddn cn=Manager,dc=tianyisc,dc=com  Now configure the LDAP profile for NSS:
-sudo auth-client-config -t nss -p lac_ldap  Configure the system to use LDAP for authentication:
-sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the package:
-&amp;gt; sudo apt install ldapscripts &amp;gt; ``` &amp;gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following: &amp;gt; ``` &amp;gt; SERVER=localhost &amp;gt; BINDDN=&#39;cn=admin,dc=example,dc=com&#39; &amp;gt; BINDPWDFILE=&amp;quot;/etc/ldapscripts/ldapscripts.</description>
+      <description>ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts 某些配置条目可能如下：
+base dc=tianyisc,dc=comuri ldap://192.168.99.89/binddn cn=Manager,dc=tianyisc,dc=combindpw passwordrootbinddn cn=Manager,dc=tianyisc,dc=com Now configure the LDAP profile for NSS:
+sudo auth-client-config -t nss -p lac_ldap Configure the system to use LDAP for authentication:
+sudo pam-auth-update 添加用户 ldapscript（方式一）  Install the package:
+sudo apt install ldapscripts Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following:
+SERVER=localhostBINDDN=&#39;cn=admin,dc=example,dc=com&#39;BINDPWDFILE=&amp;quot;/etc/ldapscripts/ldapscripts.passwd&amp;quot;SUFFIX=&#39;dc=example,dc=com&#39;GSUFFIX=&#39;ou=Groups&#39;USUFFIX=&#39;ou=People&#39;MSUFFIX=&#39;ou=Computers&#39;GIDSTART=10000UIDSTART=10000MIDSTART=10000Now, create the ldapscripts.</description>
     </item>
     
   </channel>

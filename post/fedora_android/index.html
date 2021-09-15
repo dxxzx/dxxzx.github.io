@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.88.1" />
 
-  <title>gerrit &middot; Dylan</title>
+  <title>Establish Android Build Environment Under Fedora 27 &middot; Dylan</title>
 
   
   
@@ -36,8 +36,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Dylan" href="https://dxxzx.github.io/tags/gerrit/index.xml" />
   
 
   
@@ -110,10 +108,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://dxxzx.github.io/tags/gerrit/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -217,24 +211,23 @@
 
 
 <div class="header">
-  <h1>gerrit</h1>
+  <h1>Establish Android Build Environment Under Fedora 27</h1>
+  <h2></h2>
 </div>
-
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/gerrit_server/">gerrit service establish guide</a></h2>
 
-    <div class="post-meta">
+  <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017</time>
+    <time>04 Dec 2017</time>
   </div>
 
   
 
+  
+  
+  
   
 
   
@@ -243,7 +236,11 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/gerrit">gerrit</a>
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/platform">platform</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/build">build</a>
     
   </div>
   
@@ -251,23 +248,60 @@
 
 </div>
 
-  </header>
-
-  <p>
-  Gerrit server establish Before install gerrit, please ensure mariadb service and openldap service are installed and configured. If not yet, please refer mariadb server establish, openldap server establish.
-init gerrit site using below command to init gerrit site
-java -jar gerrit.war init -d gerrit-site output may look like below:
-Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [2017-11-10 21:25:18,220] [main] INFO com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults *** Gerrit Code Review 2.14.4 *** Create '/home/dylan/gerrit-site' [Y/n]?
-  </p>
+  <h1 id="establish-android-build-environment-under-fedora-27">Establish Android Build Environment Under Fedora 27</h1>
+<h2 id="install-required-packages">Install required packages</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">dnf install git-core gnupg flex bison gperf zip curl zlib-devel gcc-arm-linux-gnu gcc-c++-arm-linux-gnu ccache unzip java-1.8.0-openjdk-devel make automake autoconf python2 ncurses-compat-libs libstdc++.i686
+</code></pre></div><h2 id="configure-usb-access">Configure USB Access</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">
+</code></pre></div>
 
   
-  <footer>
-    <a href="https://dxxzx.github.io/post/gerrit_server/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://dxxzx.github.io/post/jenkins_ldap_auth/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://dxxzx.github.io/post/jenkins_ldap_auth/">jenkins ldap auth</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
 
   
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'Your Disqus shortname';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
 </div>
 
 </div>
@@ -281,3 +315,4 @@ Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [201
 
 </body>
 </html>
+

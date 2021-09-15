@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gerrit on Dylan</title>
+    <title>gerrit on Dylan</title>
     <link>https://dxxzx.github.io/tags/gerrit/</link>
-    <description>Recent content in Gerrit on Dylan</description>
+    <description>Recent content in gerrit on Dylan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate>
-    
-	<atom:link href="https://dxxzx.github.io/tags/gerrit/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate><atom:link href="https://dxxzx.github.io/tags/gerrit/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>gerrit service establish guide</title>
       <link>https://dxxzx.github.io/post/gerrit_server/</link>
@@ -20,7 +16,7 @@
       <guid>https://dxxzx.github.io/post/gerrit_server/</guid>
       <description>Gerrit server establish Before install gerrit, please ensure mariadb service and openldap service are installed and configured. If not yet, please refer mariadb server establish, openldap server establish.
 init gerrit site using below command to init gerrit site
-java -jar gerrit.war init -d gerrit-site  output may look like below:
+java -jar gerrit.war init -d gerrit-site output may look like below:
 Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [2017-11-10 21:25:18,220] [main] INFO com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults *** Gerrit Code Review 2.14.4 *** Create &#39;/home/dylan/gerrit-site&#39; [Y/n]?</description>
     </item>
     

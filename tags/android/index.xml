@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Android on Dylan</title>
+    <title>android on Dylan</title>
     <link>https://dxxzx.github.io/tags/android/</link>
-    <description>Recent content in Android on Dylan</description>
+    <description>Recent content in android on Dylan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 10 Nov 2017 11:34:11 +0800</lastBuildDate>
-    
-	<atom:link href="https://dxxzx.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Mon, 04 Dec 2017 20:07:05 +0800</lastBuildDate><atom:link href="https://dxxzx.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Establish Android Build Environment Under Fedora 27</title>
+      <link>https://dxxzx.github.io/post/fedora_android/</link>
+      <pubDate>Mon, 04 Dec 2017 20:07:05 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/post/fedora_android/</guid>
+      <description>Establish Android Build Environment Under Fedora 27 Install required packages dnf install git-core gnupg flex bison gperf zip curl zlib-devel gcc-arm-linux-gnu gcc-c++-arm-linux-gnu ccache unzip java-1.8.0-openjdk-devel make automake autoconf python2 ncurses-compat-libs libstdc++.i686 Configure USB Access </description>
+    </item>
     
     <item>
       <title>android source directory structure</title>
@@ -29,6 +34,15 @@
       <guid>https://dxxzx.github.io/post/understanding_build_layer/</guid>
       <description>理解构建层 先看看Android官方的解释
  Understand Build Layers The build hierarchy includes the abstraction layers that correspond to the physical makeup of a device. These layers are described in the table below. Each layer relates to the one above it in a one-to-many relationship. For example, an architecture can have more than one board and each board can have more than one product. You may define an element in a given layer as a specialization of an element in the same layer, thus eliminating copying and simplifying maintenance.</description>
+    </item>
+    
+    <item>
+      <title>understanding android compiling progress</title>
+      <link>https://dxxzx.github.io/post/android_compilation_procedure/</link>
+      <pubDate>Tue, 12 Sep 2017 09:21:11 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/post/android_compilation_procedure/</guid>
+      <description> build/core/main.mk:108:include $(BUILD_SYSTEM)/config.mk build/core/config.mk:137:include $(BUILD_SYSTEM)/envsetup.mk build/core/config.mk:155:include $(board_config_mk) build/core/envsetup.mk:115:include $(BUILD_SYSTEM)/product_config.mk build/core/product_config.mk:179:include $(BUILD_SYSTEM)/product.mk build/core/product_config.mk:180:include $(BUILD_SYSTEM)/device.mk build/core/config.mk:45:SRC_TARGET_DIR := $(TOPDIR)build/target build/core/config.mk:139:# Boards may be defined under $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE) build/core/config.mk:145: $(SRC_TARGET_DIR)/board/$(TARGET_DEVICE)/BoardConfig.mk \ build/core/product_config.mk:185: $(SRC_TARGET_DIR)/product/AndroidProducts.mk) build/core/product_config.mk:267:$(foreach runtime, $(product_runtimes), $(eval include $(SRC_TARGET_DIR)/product/$(runtime).mk)) build/core/product.mk:33: $(SRC_TARGET_DIR)/product/AndroidProducts.mk  </description>
     </item>
     
   </channel>

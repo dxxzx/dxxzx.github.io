@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.31" />
+  <meta name="generator" content="Hugo 0.88.1" />
 
   <title>ubuntu ldap auth &middot; Dylan</title>
 
@@ -117,21 +117,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
-    </li>
-    
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
-    </li>
-    
-
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
-    </li>
     
 
     
@@ -147,9 +133,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
-    </li>
+
     
 
     
@@ -259,156 +243,107 @@
 
 </div>
 
-  
-
-<h1 id="ubuntu网络认证">ubuntu网络认证</h1>
-
+  <h1 id="ubuntu网络认证">ubuntu网络认证</h1>
 <h2 id="安装必要软件">安装必要软件</h2>
-
-<pre><code class="language-sh">sudo apt install libnss-ldap ldapscripts
-</code></pre>
-
-<p>某些配置条目可能如下：</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt install libnss-ldap ldapscripts
+</code></pre></div><p>某些配置条目可能如下：</p>
 <pre><code>base dc=tianyisc,dc=com
 uri ldap://192.168.99.89/
 binddn cn=Manager,dc=tianyisc,dc=com
 bindpw password
 rootbinddn cn=Manager,dc=tianyisc,dc=com
 </code></pre>
-
 <p>Now configure the LDAP profile for NSS:</p>
-
-<pre><code class="language-sh">sudo auth-client-config -t nss -p lac_ldap
-</code></pre>
-
-<p>Configure the system to use LDAP for authentication:</p>
-
-<pre><code class="language-sh">sudo pam-auth-update
-</code></pre>
-
-<h2 id="添加用户">添加用户</h2>
-
-<h3 id="ldapscript-方式一">ldapscript（方式一）</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo auth-client-config -t nss -p lac_ldap
+</code></pre></div><p>Configure the system to use LDAP for authentication:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo pam-auth-update
+</code></pre></div><h2 id="添加用户">添加用户</h2>
+<h3 id="ldapscript方式一">ldapscript（方式一）</h3>
 <blockquote>
 <p>Install the package:</p>
-
-<pre><code class="language-sh">&gt; sudo apt install ldapscripts
-&gt; ```
-&gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following:
-&gt; ```
-&gt; SERVER=localhost
-&gt; BINDDN='cn=admin,dc=example,dc=com'
-&gt; BINDPWDFILE=&quot;/etc/ldapscripts/ldapscripts.passwd&quot;
-&gt; SUFFIX='dc=example,dc=com'
-&gt; GSUFFIX='ou=Groups'
-&gt; USUFFIX='ou=People'
-&gt; MSUFFIX='ou=Computers'
-&gt; GIDSTART=10000
-&gt; UIDSTART=10000
-&gt; MIDSTART=10000
-&gt; ```
-&gt; Now, create the ldapscripts.passwd file to allow rootDN access to the directory:
-&gt; ```sh
-&gt; sudo sh -c &quot;echo -n 'secret' &gt; /etc/ldapscripts/ldapscripts.passwd&quot;
-&gt; sudo chmod 400 /etc/ldapscripts/ldapscripts.passwd
-&gt; ```
-&gt; Replace “secret” with the actual password for your database's rootDN user.
-&gt; 
-&gt; The scripts are now ready to help manage your directory. Here are some examples of how to use them:
-&gt; 
-&gt; Create a new user:
-&gt; ```sh
-&gt; sudo ldapadduser george example
-&gt; ```
-&gt; This will create a user with uid george and set the user's primary group (gid) to example
-&gt; 
-&gt; Change a user's password:
-&gt; ```sh
-&gt; sudo ldapsetpasswd george
-&gt; Changing password for user uid=george,ou=People,dc=example,dc=com
-&gt; New Password: 
-&gt; New Password (verify):
-&gt; ```
-&gt; Delete a user:
-&gt; ```sh
-&gt; sudo ldapdeleteuser george
-&gt; ```
-&gt; Add a group:
-&gt; ```sh
-&gt; sudo ldapaddgroup qa
-&gt; ```
-&gt; Delete a group:
-&gt; ```sh
-&gt; sudo ldapdeletegroup qa
-&gt; ```
-&gt; Add a user to a group:
-&gt; ```sh
-&gt; sudo ldapaddusertogroup george qa
-&gt; ```
-&gt; You should now see a memberUid attribute for the qa group with a value of george.
-&gt; 
-&gt; Remove a user from a group:
-&gt; ```sh
-&gt; sudo ldapdeleteuserfromgroup george qa
-&gt; ```
-&gt; The memberUid attribute should now be removed from the qa group.
-&gt; 
-&gt; The ldapmodifyuser script allows you to add, remove, or replace a user's attributes. The script uses the same syntax as the ldapmodify utility. &gt; For example:
-&gt; ```sh
-&gt; sudo ldapmodifyuser george
-&gt; # About to modify the following entry :
-&gt; dn: uid=george,ou=People,dc=example,dc=com
-&gt; objectClass: account
-&gt; objectClass: posixAccount
-&gt; cn: george
-&gt; uid: george
-&gt; uidNumber: 1001
-&gt; gidNumber: 1001
-&gt; homeDirectory: /home/george
-&gt; loginShell: /bin/bash
-&gt; gecos: george
-&gt; description: User account
-&gt; userPassword:: e1NTSEF9eXFsTFcyWlhwWkF1eGUybVdFWHZKRzJVMjFTSG9vcHk=
-&gt; 
-&gt; # Enter your modifications here, end with CTRL-D.
-&gt; dn: uid=george,ou=People,dc=example,dc=com
-&gt; replace: gecos
-&gt; gecos: George Carlin
-&gt; ```
-&gt; The user's gecos should now be “George Carlin”.
-
-__这种方法添加的用户需要额外添加一些属性，尤其mail属性，这会在其他使用到__
-添加mail属性
-```sh
-sudo ldapmodifyuser george
-# About to modify the following entry :
-dn: uid=george,ou=People,dc=example,dc=com
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt install ldapscripts
+</code></pre></div><p>Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following:</p>
+<pre tabindex="0"><code>SERVER=localhost
+BINDDN='cn=admin,dc=example,dc=com'
+BINDPWDFILE=&quot;/etc/ldapscripts/ldapscripts.passwd&quot;
+SUFFIX='dc=example,dc=com'
+GSUFFIX='ou=Groups'
+USUFFIX='ou=People'
+MSUFFIX='ou=Computers'
+GIDSTART=10000
+UIDSTART=10000
+MIDSTART=10000
+</code></pre><p>Now, create the ldapscripts.passwd file to allow rootDN access to the directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo sh -c <span style="color:#e6db74">&#34;echo -n &#39;secret&#39; &gt; /etc/ldapscripts/ldapscripts.passwd&#34;</span>
+sudo chmod <span style="color:#ae81ff">400</span> /etc/ldapscripts/ldapscripts.passwd
+</code></pre></div><p>Replace “secret” with the actual password for your database&rsquo;s rootDN user.</p>
+<p>The scripts are now ready to help manage your directory. Here are some examples of how to use them:</p>
+<p>Create a new user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapadduser george example
+</code></pre></div><p>This will create a user with uid george and set the user&rsquo;s primary group (gid) to example</p>
+<p>Change a user&rsquo;s password:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapsetpasswd george
+Changing password <span style="color:#66d9ef">for</span> user uid<span style="color:#f92672">=</span>george,ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+New Password: 
+New Password <span style="color:#f92672">(</span>verify<span style="color:#f92672">)</span>:
+</code></pre></div><p>Delete a user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapdeleteuser george
+</code></pre></div><p>Add a group:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapaddgroup qa
+</code></pre></div><p>Delete a group:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapdeletegroup qa
+</code></pre></div><p>Add a user to a group:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapaddusertogroup george qa
+</code></pre></div><p>You should now see a memberUid attribute for the qa group with a value of george.</p>
+<p>Remove a user from a group:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapdeleteuserfromgroup george qa
+</code></pre></div><p>The memberUid attribute should now be removed from the qa group.</p>
+<p>The ldapmodifyuser script allows you to add, remove, or replace a user&rsquo;s attributes. The script uses the same syntax as the ldapmodify utility. &gt; For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapmodifyuser george
+<span style="color:#75715e"># About to modify the following entry :</span>
+dn: uid<span style="color:#f92672">=</span>george,ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
 objectClass: account
 objectClass: posixAccount
 cn: george
 uid: george
-uidNumber: 1001
-gidNumber: 1001
+uidNumber: <span style="color:#ae81ff">1001</span>
+gidNumber: <span style="color:#ae81ff">1001</span>
+homeDirectory: /home/george
+loginShell: /bin/bash
+gecos: george
+description: User account
+userPassword:: e1NTSEF9eXFsTFcyWlhwWkF1eGUybVdFWHZKRzJVMjFTSG9vcHk<span style="color:#f92672">=</span>
+
+<span style="color:#75715e"># Enter your modifications here, end with CTRL-D.</span>
+dn: uid<span style="color:#f92672">=</span>george,ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+replace: gecos
+gecos: George Carlin
+</code></pre></div><p>The user&rsquo;s gecos should now be “George Carlin”.</p>
+</blockquote>
+<p><strong>这种方法添加的用户需要额外添加一些属性，尤其mail属性，这会在其他使用到</strong>
+添加mail属性</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ldapmodifyuser george
+<span style="color:#75715e"># About to modify the following entry :</span>
+dn: uid<span style="color:#f92672">=</span>george,ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
+objectClass: account
+objectClass: posixAccount
+cn: george
+uid: george
+uidNumber: <span style="color:#ae81ff">1001</span>
+gidNumber: <span style="color:#ae81ff">1001</span>
 homeDirectory: /home/george
 loginShell: /bin/bash
 gecos: george
 description: User account
 userPassword:: e1NTSEF9eXFsTFcyWlhwWkF1eGUybVdFWHZKRzJVMj
-# Enter your modifications here, end with CTRL-D.
-dn: uid=george,ou=People,dc=example,dc=com
+<span style="color:#75715e"># Enter your modifications here, end with CTRL-D.</span>
+dn: uid<span style="color:#f92672">=</span>george,ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>example,dc<span style="color:#f92672">=</span>com
 add: mail
 mail: username@example.com
-</code></pre>
-</blockquote>
-
-<h3 id="ldapadd-方式二">ldapadd（方式二）</h3>
-
+</code></pre></div><h3 id="ldapadd方式二">ldapadd（方式二）</h3>
 <p>编辑文件add_user.ldif</p>
-
-<pre><code class="language-sh">cat &gt; add_user.ldif &lt;&lt; &quot;EOF&quot;
-dn: uid=dylan,ou=People,dc=tianyisc,dc=com
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat &gt; add_user.ldif &lt;&lt; <span style="color:#e6db74">&#34;EOF&#34;</span>
+dn: uid<span style="color:#f92672">=</span>dylan,ou<span style="color:#f92672">=</span>People,dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
@@ -417,29 +352,23 @@ sn: Deng
 givenName: Dylan
 cn: Dylan Deng
 displayName: Dylan Deng
-uidNumber: 10000
-gidNumber: 5000
+uidNumber: <span style="color:#ae81ff">10000</span>
+gidNumber: <span style="color:#ae81ff">5000</span>
 gecos: Dylan Deng
 loginShell: /bin/bash
 homeDirectory: /home/dylan
 mail: dengxingxian@tianyisc.com
 EOF
-</code></pre>
-
-<p>添加用户</p>
-
-<pre><code class="language-sh">ldapadd -LLL -D cn=Manager,dc=tianyisc,dc=com -h 192.168.99.89 -b dc=tianyisc,dc=com -W -f add_user.ldif
-</code></pre>
-
-<p><strong>这样添加的用户仅存在于网络上，不能使用passwd修改密码完善方法如下：</strong></p>
-
+</code></pre></div><p>添加用户</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ldapadd -LLL -D cn<span style="color:#f92672">=</span>Manager,dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com -h 192.168.99.89 -b dc<span style="color:#f92672">=</span>tianyisc,dc<span style="color:#f92672">=</span>com -W -f add_user.ldif
+</code></pre></div><p><strong>这样添加的用户仅存在于网络上，不能使用passwd修改密码完善方法如下：</strong></p>
 <p>在/etc/passwd中添加对应的用户信息</p>
-
 <pre><code>dylan:x:10000:5000:Dylan Deng:/home/dylan:/bin/bash
 </code></pre>
-
-<p>参考：
-- <a href="https://help.ubuntu.com/lts/serverguide/openldap-server.html#openldap-auth-config">OpenLDAP Server</a></p>
+<p>参考：</p>
+<ul>
+<li><a href="https://help.ubuntu.com/lts/serverguide/openldap-server.html#openldap-auth-config">OpenLDAP Server</a></li>
+</ul>
 
 
   

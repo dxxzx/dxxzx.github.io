@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.88.1" />
 
-  <title>gerrit &middot; Dylan</title>
+  <title>git &middot; Dylan</title>
 
   
   
@@ -37,7 +37,7 @@
 
   
   
-  <link rel="alternate" type="application/rss+xml" title="Dylan" href="https://dxxzx.github.io/tags/gerrit/index.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Dylan" href="https://dxxzx.github.io/tags/git/index.xml" />
   
 
   
@@ -112,7 +112,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://dxxzx.github.io/tags/gerrit/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      <a class="pure-menu-link" href="https://dxxzx.github.io/tags/git/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
     </li>
     
 
@@ -217,14 +217,14 @@
 
 
 <div class="header">
-  <h1>gerrit</h1>
+  <h1>git</h1>
 </div>
 
 <div class="content">
   
     <article>
   <header>
-    <h2><a href="https://dxxzx.github.io/post/gerrit_server/">gerrit service establish guide</a></h2>
+    <h2><a href="https://dxxzx.github.io/post/git_tutorials/">git usage guide</a></h2>
 
     <div class="post-meta">
 
@@ -243,7 +243,7 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/gerrit">gerrit</a>
+      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/git">git</a>
     
   </div>
   
@@ -254,15 +254,15 @@
   </header>
 
   <p>
-  Gerrit server establish Before install gerrit, please ensure mariadb service and openldap service are installed and configured. If not yet, please refer mariadb server establish, openldap server establish.
-init gerrit site using below command to init gerrit site
-java -jar gerrit.war init -d gerrit-site output may look like below:
-Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [2017-11-10 21:25:18,220] [main] INFO com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults *** Gerrit Code Review 2.14.4 *** Create '/home/dylan/gerrit-site' [Y/n]?
+  Git使用指南 基本配置 开始使用git之前一般需要配置两个项目，操作命令如下：
+git config --global user.name &#34;Dylan Deng&#34; git config --global user.email &#34;dengxingxian@tianyisc.com&#34; 分别把两行命令中引号里的内容改成你自己的名字和邮箱。
+一些使用案例 git checkout -b neimengv1.0 neimengv1.0 # 取得tag`neimengv1.0`的内容并创建为本地分支neimengv1.0 git checkout -b master origin/master # 取得master分支的内容并创建为本地分支master git fetch origin refs/changes/34/34/1 &amp;&amp; git checkout -b change-34 refs/changes/34/34/1 # 取得编号为34的改动的内容并创建为本地分支change-34 git push origin HEAD:refs/for/common # 上传当前提交到代码审阅，审阅通过会合并到common分支 初始化仓库 获得远程仓库 git clone &lt;repository_url&gt; [-b &lt;branch_name&gt;] [directory] repository_url为远程仓库地址，为必须参数。 -b 此选项为可选参数，如果不提供这个参数，下载完成之后默认检出master分支。 directory 为可选参数，如果不提供这个参数，git会根据url，在当前路径创建一个与仓库同名文件夹，然后将仓库克隆到此文件夹。 example:
+git clone ssh://dylan@192.168.99.89:29418/aml_02 -b common aml_02 初始化本地仓库 如果远程仓库不存在或者远程仓库存在但是为空的，我们需要在本地创建一个git仓库然后上传到远程。操作过程如下：
   </p>
 
   
   <footer>
-    <a href="https://dxxzx.github.io/post/gerrit_server/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+    <a href="https://dxxzx.github.io/post/git_tutorials/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

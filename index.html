@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.31" />
+  <meta name="generator" content="Hugo 0.88.1" />
 
   <title>Dylan</title>
 
@@ -123,21 +123,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://facebook.com/dxxzx" target="_blank"><i class="fa fa-facebook-square fa-fw"></i>Facebook</a>
-    </li>
-    
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://plus.google.com/+102591860149128628370" target="_blank"><i class="fa fa-google-plus-square fa-fw"></i>Google+</a>
-    </li>
-    
-
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="http://weibo.com/u/2624573885" target="_blank"><i class="fa fa-weibo fa-fw"></i>Weibo</a>
-    </li>
     
 
     
@@ -153,9 +139,7 @@
     
 
     
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://youtube.com/user/*" target="_blank"><i class="fa fa-youtube-square fa-fw"></i>YouTube</a>
-    </li>
+
     
 
     
@@ -241,31 +225,19 @@
   
     <article>
   <header>
-    <h2><a href="https://dxxzx.github.io/post/jenkins_ldap_auth/">jenkins ldap auth</a></h2>
+    <h2><a href="https://dxxzx.github.io/post/">Posts</a></h2>
 
     <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017</time>
+    <time>04 Dec 2017</time>
   </div>
 
   
 
   
 
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/jenkins">jenkins</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
-    
-  </div>
-  
   
 
 </div>
@@ -273,244 +245,9 @@
   </header>
 
   <p>
-   Jenkins Authorize with LDAP Install LDAP plugin login to jenkins, go to Manage Jenkins -&gt; Manage Plugins -&gt; Available to install LDAP plugin.
-Configure LDAP plugin login to jenkins, go to Manage Jenkins -&gt; Configure Global Security -&gt; Access Coutrol to configure LDAP.
- Server: &lt;host name of ldap server&gt;, possible value: 192.168.1.101, ldap.example.com root DN: usually be dc=my-domain,dc=com User search base: usually be ou=People User search filter: usually be uid={0} Manager DN: usually be cn=Manager,dc=my-domain,dc=com or cn=admin,dc=my-domain,dc=com Manager Password: Your Manager password Display Name LDAP attribute: usually be displayname Email Address LDAP attribute: usually be mail  
+  
   </p>
 
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/project_structure/">android source directory structure</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017</time>
-  </div>
-
-  
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/platform">platform</a>
-    
-  </div>
-  
-  
-
-</div>
-
-  </header>
-
-  <p>
-  abi &ndash;This folder contains a sub folder called cpp which actually contains many C++ files linked to many places. art &ndash;it is the folder that deals with the compilation of the latest android ART runtime. If you&rsquo;re looking into source directories of some other android versions, you won&rsquo;t fins it obviously bionic &ndash;the C-runtime for Android. Note that Android is not using glibc like most Linux distributions. Instead the c-library is called bionic and is based mostly on BSD-derived sources.
-  </p>
-
-  
-  <footer>
-    <a href="https://dxxzx.github.io/post/project_structure/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/gerrit_server/">gerrit service establish guide</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017</time>
-  </div>
-
-  
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/gerrit">gerrit</a>
-    
-  </div>
-  
-  
-
-</div>
-
-  </header>
-
-  <p>
-  Gerrit server establish Before install gerrit, please ensure mariadb service and openldap service are installed and configured. If not yet, please refer mariadb server establish, openldap server establish.
-init gerrit site using below command to init gerrit site
-java -jar gerrit.war init -d gerrit-site  output may look like below:
-Using secure store: com.google.gerrit.server.securestore.DefaultSecureStore [2017-11-10 21:25:18,220] [main] INFO com.google.gerrit.server.config.GerritServerConfigProvider : No /home/dylan/gerrit-site/etc/gerrit.config; assuming defaults *** Gerrit Code Review 2.14.4 *** Create '/home/dylan/gerrit-site' [Y/n]?
-  </p>
-
-  
-  <footer>
-    <a href="https://dxxzx.github.io/post/gerrit_server/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/openldap_service/">openldap service establish guide</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017</time>
-  </div>
-
-  
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/openldap">openldap</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
-    
-  </div>
-  
-  
-
-</div>
-
-  </header>
-
-  <p>
-  establish openldap server Install and start service yum install openldap-servers openldap-clients cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG chown ldap. /var/lib/ldap/DB_CONFIG systemctl start slapd systemctl enable slapd  setup OpenLDAP manager password generate encrptyed password:
-# slappasswd New password: Re-enter new password: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8  string {SSHA}xxxxxxxxxxxxxxxxxxxxxxxx are encrypted password, it will be used later. then, create file like below.
-cat &gt; chrootpw.ldif &lt;&lt; &quot;EOF&quot; dn: olcDatabase={0}config,cn=config changetype: modify add: olcRootPW olcRootPW: {SSHA}2aaO8Jrm2AkRYmI8dMptxesNsQ9bI2y8 EOF  import this file:
-  </p>
-
-  
-  <footer>
-    <a href="https://dxxzx.github.io/post/openldap_service/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/ubuntu_ldap_auth/">ubuntu ldap auth</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017</time>
-  </div>
-
-  
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ubuntu">ubuntu</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/ldap">ldap</a>
-    
-  </div>
-  
-  
-
-</div>
-
-  </header>
-
-  <p>
-  ubuntu网络认证 安装必要软件 sudo apt install libnss-ldap ldapscripts  某些配置条目可能如下：
-base dc=tianyisc,dc=com uri ldap://192.168.99.89/ binddn cn=Manager,dc=tianyisc,dc=com bindpw password rootbinddn cn=Manager,dc=tianyisc,dc=com  Now configure the LDAP profile for NSS:
-sudo auth-client-config -t nss -p lac_ldap  Configure the system to use LDAP for authentication:
-sudo pam-auth-update  添加用户 ldapscript（方式一）  Install the package:
-&gt; sudo apt install ldapscripts &gt; ``` &gt; Then edit the file /etc/ldapscripts/ldapscripts.conf to arrive at something similar to the following: &gt; ``` &gt; SERVER=localhost &gt; BINDDN='cn=admin,dc=example,dc=com' &gt; BINDPWDFILE=&quot;/etc/ldapscripts/ldapscripts.
-  </p>
-
-  
-  <footer>
-    <a href="https://dxxzx.github.io/post/ubuntu_ldap_auth/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://dxxzx.github.io/post/understanding_build_layer/">understanding android build layer</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>10 Nov 2017</time>
-  </div>
-
-  
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/build">build</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://dxxzx.github.io/tags/android">android</a>
-    
-  </div>
-  
-  
-
-</div>
-
-  </header>
-
-  <p>
-  理解构建层 先看看Android官方的解释
- Understand Build Layers The build hierarchy includes the abstraction layers that correspond to the physical makeup of a device. These layers are described in the table below. Each layer relates to the one above it in a one-to-many relationship. For example, an architecture can have more than one board and each board can have more than one product. You may define an element in a given layer as a specialization of an element in the same layer, thus eliminating copying and simplifying maintenance.
-  </p>
-
-  
-  <footer>
-    <a href="https://dxxzx.github.io/post/understanding_build_layer/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
   
 </article>
 
