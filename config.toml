@@ -60,16 +60,6 @@ paginate = 10
     url = "/contact/"
 
 [social]
-  # Link your social networking accounts to the side menu
-  # SNS microblogging
-  facebook = "dxxzx"
-  googleplus = "102591860149128628370"
-  weibo = "u/2624573885"
-
-
-  # SNS photo/video sharing
-  youtube = "*"
-
   # Techie
   github = "dxxzx"
   stackoverflow = "*"
