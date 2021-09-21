@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.88.1" />
+
+  <title>Kubernetes Authenticating Proxy &middot; Dylan</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://dxxzx.github.io/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://dxxzx.github.io/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://dxxzx.github.io/">Blackburn</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/tags/"><i class='fa fa-tag fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://dxxzx.github.io/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/dxxzx" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://stackoverflow.com/users/*" target="_blank"><i class="fa fa-stack-overflow fa-fw"></i>Stack Overflow</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2017. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Kubernetes Authenticating Proxy</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>20 Sep 2021</time>
+  </div>
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+</div>
+
+  <h1 id="1-overview">1 Overview</h1>
+<p>Refer to <code>net/http/httputil/reverseproxy.go</code>. Modify it as a Kubernetes Authenticating Proxy.</p>
+<h1 id="2-official-docuement">2 Official Docuement</h1>
+<blockquote>
+<h3 id="authenticating-proxy">Authenticating Proxy</h3>
+<p>The API server can be configured to identify users from request header values, such as <code>X-Remote-User</code>.
+It is designed for use in combination with an authenticating proxy, which sets the request header value.</p>
+<ul>
+<li><code>--requestheader-username-headers</code> Required, case-insensitive. Header names to check, in order, for the user identity. The first header containing a value is used as the username.</li>
+<li><code>--requestheader-group-headers</code> 1.6+. Optional, case-insensitive. &ldquo;X-Remote-Group&rdquo; is suggested. Header names to check, in order, for the user&rsquo;s groups. All values in all specified headers are used as group names.</li>
+<li><code>--requestheader-extra-headers-prefix</code> 1.6+. Optional, case-insensitive. &ldquo;X-Remote-Extra-&rdquo; is suggested. Header prefixes to look for to determine extra information about the user (typically used by the configured authorization plugin). Any headers beginning with any of the specified prefixes have the prefix removed. The remainder of the header name is lowercased and <a href="https://tools.ietf.org/html/rfc3986#section-2.1">percent-decoded</a> and becomes the extra key, and the header value is the extra value.</li>
+</ul>
+<p>Prior to 1.11.3 (and 1.10.7, 1.9.11), the extra key could only contain characters which were <a href="https://tools.ietf.org/html/rfc7230#section-3.2.6">legal in HTTP header labels</a>.</p>
+<p>For example, with this configuration:</p>
+<pre tabindex="0"><code>--requestheader-username-headers=X-Remote-User
+--requestheader-group-headers=X-Remote-Group
+--requestheader-extra-headers-prefix=X-Remote-Extra-
+</code></pre><p>this request:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="http"><span style="color:#a6e22e">GET</span> / <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+X-Remote-User<span style="color:#f92672">:</span> <span style="color:#ae81ff">fido</span>
+X-Remote-Group<span style="color:#f92672">:</span> <span style="color:#ae81ff">dogs</span>
+X-Remote-Group<span style="color:#f92672">:</span> <span style="color:#ae81ff">dachshunds</span>
+X-Remote-Extra-Acme.com%2Fproject<span style="color:#f92672">:</span> <span style="color:#ae81ff">some-project</span>
+X-Remote-Extra-Scopes<span style="color:#f92672">:</span> <span style="color:#ae81ff">openid</span>
+X-Remote-Extra-Scopes<span style="color:#f92672">:</span> <span style="color:#ae81ff">profile</span>
+</code></pre></div><p>would result in this user info:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">fido</span>
+<span style="color:#f92672">groups</span>:
+- <span style="color:#ae81ff">dogs</span>
+- <span style="color:#ae81ff">dachshunds</span>
+<span style="color:#f92672">extra</span>:
+  <span style="color:#f92672">acme.com/project</span>:
+  - <span style="color:#ae81ff">some-project</span>
+  <span style="color:#f92672">scopes</span>:
+  - <span style="color:#ae81ff">openid</span>
+  - <span style="color:#ae81ff">profile</span>
+</code></pre></div><p>In order to prevent header spoofing, the authenticating proxy is required to present a valid client
+certificate to the API server for validation against the specified CA before the request headers are
+checked. WARNING: do <strong>not</strong> reuse a CA that is used in a different context unless you understand
+the risks and the mechanisms to protect the CA&rsquo;s usage.</p>
+<ul>
+<li><code>--requestheader-client-ca-file</code> Required. PEM-encoded certificate bundle. A valid client certificate must be presented and validated against the certificate authorities in the specified file before the request headers are checked for user names.</li>
+<li><code>--requestheader-allowed-names</code> Optional. List of Common Name values (CNs). If set, a valid client certificate with a CN in the specified list must be presented before the request headers are checked for user names. If empty, any CN is allowed.</li>
+</ul>
+</blockquote>
+<h1 id="3-analyse-reverseproxy">3 Analyse ReverseProxy</h1>
+<p>The key method of reverseproxy is <code>func (p *ReverseProxy) ServeHTTP(rw http.ResponseWriter, req *http.Request)</code>. Look at this method, first, it prepared a http.Transport, search it, we could see it used as <code>res, err := transport.RoundTrip(outreq)</code> later. Guess it is used to obtain response fron kube-apiserver. So, it need to setup TLSClientConfig.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">transport</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Transport</span>{<span style="color:#a6e22e">TLSClientConfig</span>: <span style="color:#a6e22e">TLSClientConfig</span>}
+</code></pre></div><p>Then, refer to Official document, we need to setup authentication headers in out request. Setup these after clone incomming request as out request and before send the out request. It may look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Header</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;X-Remote-User&#34;</span>, <span style="color:#e6db74">&#34;admin&#34;</span>)
+<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Header</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;X-Remote-Group&#34;</span>, <span style="color:#e6db74">&#34;system:master&#34;</span>)
+</code></pre></div><p>Finally, we need change the destination of this request, set it host to kube-apiserver host. Set it after clone incomming request as out request and before send the out request.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Host</span> = <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">KubeHost</span>
+<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Scheme</span> = <span style="color:#e6db74">&#34;https&#34;</span>
+</code></pre></div><h1 id="4-prepare-certificate">4 Prepare Certificate</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir -pv certs
+cp -rv /etc/kubernetes/pki/<span style="color:#f92672">{</span>ca.crt,front-proxy-client.<span style="color:#f92672">{</span>crt,key<span style="color:#f92672">}}</span> certs
+chown <span style="color:#e6db74">${</span>username<span style="color:#e6db74">}</span>:<span style="color:#e6db74">${</span>username<span style="color:#e6db74">}</span> -R certs  <span style="color:#75715e"># set username as your normal username</span>
+</code></pre></div><h1 id="5-all-code">5 All code</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;crypto/tls&#34;</span>
+	<span style="color:#e6db74">&#34;crypto/x509&#34;</span>
+	<span style="color:#e6db74">&#34;io&#34;</span>
+	<span style="color:#e6db74">&#34;io/ioutil&#34;</span>
+	<span style="color:#e6db74">&#34;log&#34;</span>
+	<span style="color:#e6db74">&#34;net&#34;</span>
+	<span style="color:#e6db74">&#34;net/http&#34;</span>
+	<span style="color:#e6db74">&#34;net/textproto&#34;</span>
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+)
+
+<span style="color:#66d9ef">const</span> (
+	<span style="color:#a6e22e">caCertPath</span>               = <span style="color:#e6db74">&#34;certs/ca.crt&#34;</span>
+	<span style="color:#a6e22e">frontProxyClientCertPath</span> = <span style="color:#e6db74">&#34;certs/front-proxy-client.crt&#34;</span>
+	<span style="color:#a6e22e">frontProxyClientKeyPath</span>  = <span style="color:#e6db74">&#34;certs/front-proxy-client.key&#34;</span>
+)
+
+<span style="color:#66d9ef">var</span> (
+	<span style="color:#75715e">// Hop-by-hop headers. These are removed when sent to the backend.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// As of RFC 7230, hop-by-hop headers are required to appear in the
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Connection header field. These are the headers defined by the
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// obsoleted RFC 2616 (section 13.5.1) and are used for backward
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// compatibility.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">hopHeaders</span> = []<span style="color:#66d9ef">string</span>{
+		<span style="color:#e6db74">&#34;Connection&#34;</span>,
+		<span style="color:#e6db74">&#34;Proxy-Connection&#34;</span>, <span style="color:#75715e">// non-standard but still sent by libcurl and rejected by e.g. google
+</span><span style="color:#75715e"></span>		<span style="color:#e6db74">&#34;Keep-Alive&#34;</span>,
+		<span style="color:#e6db74">&#34;Proxy-Authenticate&#34;</span>,
+		<span style="color:#e6db74">&#34;Proxy-Authorization&#34;</span>,
+		<span style="color:#e6db74">&#34;Te&#34;</span>,      <span style="color:#75715e">// canonicalized version of &#34;TE&#34;
+</span><span style="color:#75715e"></span>		<span style="color:#e6db74">&#34;Trailer&#34;</span>, <span style="color:#75715e">// not Trailers per URL above; https://www.rfc-editor.org/errata_search.php?eid=4522
+</span><span style="color:#75715e"></span>		<span style="color:#e6db74">&#34;Transfer-Encoding&#34;</span>,
+		<span style="color:#e6db74">&#34;Upgrade&#34;</span>,
+	}
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">KubeAccessProxy</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">KubeHost</span>        <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">TLSClientConfig</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">tls</span>.<span style="color:#a6e22e">Config</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">KubeAccessProxy</span>) <span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">rw</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">req</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">transport</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Transport</span>{<span style="color:#a6e22e">TLSClientConfig</span>: <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">TLSClientConfig</span>}
+
+	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Context</span>()
+	<span style="color:#a6e22e">outReq</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Clone</span>(<span style="color:#a6e22e">ctx</span>)
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">ContentLength</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+		<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Body</span> = <span style="color:#66d9ef">nil</span>
+	}
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Header</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Header</span> = make(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Header</span>)
+	}
+
+	<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Close</span> = <span style="color:#66d9ef">false</span>
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">clientIP</span>, <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">SplitHostPort</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">RemoteAddr</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#75715e">// If we aren&#39;t the first proxy retain prior
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// X-Forwarded-For information as a comma+space
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// separated list and fold multiple headers into one.
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">prior</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Header</span>[<span style="color:#e6db74">&#34;X-Forwarded-For&#34;</span>]
+		<span style="color:#a6e22e">omit</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">prior</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#75715e">// Issue 38079: nil now means don&#39;t populate the header
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">prior</span>) &gt; <span style="color:#ae81ff">0</span> {
+			<span style="color:#a6e22e">clientIP</span> = <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">prior</span>, <span style="color:#e6db74">&#34;, &#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">clientIP</span>
+		}
+		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">omit</span> {
+			<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Header</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;X-Forwarded-For&#34;</span>, <span style="color:#a6e22e">clientIP</span>)
+		}
+	}
+	<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Host</span> = <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">KubeHost</span>
+	<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Scheme</span> = <span style="color:#e6db74">&#34;https&#34;</span>
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;request url: %s&#34;</span>, <span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">URL</span>)
+	<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Header</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;X-Remote-User&#34;</span>, <span style="color:#e6db74">&#34;admin&#34;</span>)
+	<span style="color:#a6e22e">outReq</span>.<span style="color:#a6e22e">Header</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;X-Remote-Group&#34;</span>, <span style="color:#e6db74">&#34;system:master&#34;</span>)
+
+	<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">transport</span>.<span style="color:#a6e22e">RoundTrip</span>(<span style="color:#a6e22e">outReq</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">rw</span>.<span style="color:#a6e22e">WriteHeader</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusBadGateway</span>)
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;err: %s&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">removeConnectionHeaders</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Header</span>)
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">h</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">hopHeaders</span> {
+		<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Header</span>.<span style="color:#a6e22e">Del</span>(<span style="color:#a6e22e">h</span>)
+	}
+
+	<span style="color:#a6e22e">copyHeader</span>(<span style="color:#a6e22e">rw</span>.<span style="color:#a6e22e">Header</span>(), <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Header</span>)
+
+	<span style="color:#75715e">// The &#34;Trailer&#34; header isn&#39;t included in the Transport&#39;s response,
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// at least for *http.Transport. Build it up from Trailer.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">announcedTrailers</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Trailer</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">announcedTrailers</span> &gt; <span style="color:#ae81ff">0</span> {
+		<span style="color:#a6e22e">trailerKeys</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">string</span>, <span style="color:#ae81ff">0</span>, len(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Trailer</span>))
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Trailer</span> {
+			<span style="color:#a6e22e">trailerKeys</span> = append(<span style="color:#a6e22e">trailerKeys</span>, <span style="color:#a6e22e">k</span>)
+		}
+		<span style="color:#a6e22e">rw</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;Trailer&#34;</span>, <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">trailerKeys</span>, <span style="color:#e6db74">&#34;, &#34;</span>))
+	}
+
+	<span style="color:#a6e22e">rw</span>.<span style="color:#a6e22e">WriteHeader</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">StatusCode</span>)
+
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">copyResponse</span>(<span style="color:#a6e22e">rw</span>, <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+		panic(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ErrAbortHandler</span>)
+	}
+	<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>() <span style="color:#75715e">// close now, instead of defer, to populate res.Trailer
+</span><span style="color:#75715e"></span>
+	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Trailer</span>) &gt; <span style="color:#ae81ff">0</span> {
+		<span style="color:#75715e">// Force chunking if we saw a response trailer.
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// This prevents net/http from calculating the length for short
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// bodies and adding a Content-Length.
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">fl</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rw</span>.(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Flusher</span>); <span style="color:#a6e22e">ok</span> {
+			<span style="color:#a6e22e">fl</span>.<span style="color:#a6e22e">Flush</span>()
+		}
+	}
+
+	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Trailer</span>) <span style="color:#f92672">==</span> <span style="color:#a6e22e">announcedTrailers</span> {
+		<span style="color:#a6e22e">copyHeader</span>(<span style="color:#a6e22e">rw</span>.<span style="color:#a6e22e">Header</span>(), <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Trailer</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">vv</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Trailer</span> {
+		<span style="color:#a6e22e">k</span> = <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">TrailerPrefix</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">k</span>
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">vv</span> {
+			<span style="color:#a6e22e">rw</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span>)
+		}
+	}
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">KubeAccessProxy</span>) <span style="color:#a6e22e">copyResponse</span>(<span style="color:#a6e22e">dst</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">src</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Reader</span>) <span style="color:#66d9ef">error</span> {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buf</span> []<span style="color:#66d9ef">byte</span>
+	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">copyBuffer</span>(<span style="color:#a6e22e">dst</span>, <span style="color:#a6e22e">src</span>, <span style="color:#a6e22e">buf</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+}
+
+<span style="color:#75715e">// copyBuffer returns any write errors or non-EOF read errors, and the amount
+</span><span style="color:#75715e">// of bytes written.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">KubeAccessProxy</span>) <span style="color:#a6e22e">copyBuffer</span>(<span style="color:#a6e22e">dst</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">src</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Reader</span>, <span style="color:#a6e22e">buf</span> []<span style="color:#66d9ef">byte</span>) (<span style="color:#66d9ef">int64</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">buf</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+		<span style="color:#a6e22e">buf</span> = make([]<span style="color:#66d9ef">byte</span>, <span style="color:#ae81ff">32</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span>)
+	}
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">written</span> <span style="color:#66d9ef">int64</span>
+	<span style="color:#66d9ef">for</span> {
+		<span style="color:#a6e22e">nr</span>, <span style="color:#a6e22e">rerr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">src</span>.<span style="color:#a6e22e">Read</span>(<span style="color:#a6e22e">buf</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">rerr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">rerr</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">EOF</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">rerr</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Canceled</span> {
+			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;httputil: ReverseProxy read error during body copy: %v&#34;</span>, <span style="color:#a6e22e">rerr</span>)
+		}
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nr</span> &gt; <span style="color:#ae81ff">0</span> {
+			<span style="color:#a6e22e">nw</span>, <span style="color:#a6e22e">werr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">dst</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">buf</span>[:<span style="color:#a6e22e">nr</span>])
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nw</span> &gt; <span style="color:#ae81ff">0</span> {
+				<span style="color:#a6e22e">written</span> <span style="color:#f92672">+=</span> int64(<span style="color:#a6e22e">nw</span>)
+			}
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">werr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+				<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">written</span>, <span style="color:#a6e22e">werr</span>
+			}
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nr</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">nw</span> {
+				<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">written</span>, <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">ErrShortWrite</span>
+			}
+		}
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">rerr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">rerr</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">EOF</span> {
+				<span style="color:#a6e22e">rerr</span> = <span style="color:#66d9ef">nil</span>
+			}
+			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">written</span>, <span style="color:#a6e22e">rerr</span>
+		}
+	}
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">removeConnectionHeaders</span>(<span style="color:#a6e22e">h</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Header</span>) {
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">f</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">h</span>[<span style="color:#e6db74">&#34;Connection&#34;</span>] {
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">sf</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">f</span>, <span style="color:#e6db74">&#34;,&#34;</span>) {
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">sf</span> = <span style="color:#a6e22e">textproto</span>.<span style="color:#a6e22e">TrimString</span>(<span style="color:#a6e22e">sf</span>); <span style="color:#a6e22e">sf</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
+				<span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Del</span>(<span style="color:#a6e22e">sf</span>)
+			}
+		}
+	}
+}
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">copyHeader</span>(<span style="color:#a6e22e">dst</span>, <span style="color:#a6e22e">src</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Header</span>) {
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">vv</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">src</span> {
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">vv</span> {
+			<span style="color:#a6e22e">dst</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span>)
+		}
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">caCertData</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#a6e22e">caCertPath</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		panic(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">frontProxyClientCertData</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#a6e22e">frontProxyClientCertPath</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		panic(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">frontProxyClientKeyData</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#a6e22e">frontProxyClientKeyPath</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		panic(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">roots</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">x509</span>.<span style="color:#a6e22e">NewCertPool</span>()
+	<span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">roots</span>.<span style="color:#a6e22e">AppendCertsFromPEM</span>(<span style="color:#a6e22e">caCertData</span>)
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+		panic(<span style="color:#e6db74">&#34;failed to parse root certificate&#34;</span>)
+	}
+	<span style="color:#a6e22e">proxyCert</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tls</span>.<span style="color:#a6e22e">X509KeyPair</span>(<span style="color:#a6e22e">frontProxyClientCertData</span>, <span style="color:#a6e22e">frontProxyClientKeyData</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		panic(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">proxyCerts</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">tls</span>.<span style="color:#a6e22e">Certificate</span>{<span style="color:#a6e22e">proxyCert</span>}
+	<span style="color:#a6e22e">tlsConfig</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">tls</span>.<span style="color:#a6e22e">Config</span>{
+		<span style="color:#a6e22e">Certificates</span>: <span style="color:#a6e22e">proxyCerts</span>,
+		<span style="color:#a6e22e">RootCAs</span>:      <span style="color:#a6e22e">roots</span>,
+	}
+	<span style="color:#a6e22e">handler</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">KubeAccessProxy</span>{
+		<span style="color:#a6e22e">KubeHost</span>:        <span style="color:#e6db74">&#34;192.168.0.2:6443&#34;</span>,
+		<span style="color:#a6e22e">TLSClientConfig</span>: <span style="color:#a6e22e">tlsConfig</span>,
+	}
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;localhost:8080&#34;</span>, <span style="color:#a6e22e">handler</span>))
+}
+</code></pre></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://dxxzx.github.io/post/fedora_android/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://dxxzx.github.io/post/fedora_android/">Establish Android Build Environment Under Fedora 27</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'Your Disqus shortname';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="https://dxxzx.github.io/js/ui.js"></script>
+
+
+
+
+
+
+</body>
+</html>
+

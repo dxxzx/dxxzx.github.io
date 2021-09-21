@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Mon, 04 Dec 2017 20:07:05 +0800</lastBuildDate><atom:link href="https://dxxzx.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Sep 2021 22:27:01 +0800</lastBuildDate><atom:link href="https://dxxzx.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes Authenticating Proxy</title>
+      <link>https://dxxzx.github.io/post/kubernetes/kubernetes-authenticating-proxy/</link>
+      <pubDate>Mon, 20 Sep 2021 22:27:01 +0800</pubDate>
+      
+      <guid>https://dxxzx.github.io/post/kubernetes/kubernetes-authenticating-proxy/</guid>
+      <description>1 Overview Refer to net/http/httputil/reverseproxy.go. Modify it as a Kubernetes Authenticating Proxy.
+2 Official Docuement  Authenticating Proxy The API server can be configured to identify users from request header values, such as X-Remote-User. It is designed for use in combination with an authenticating proxy, which sets the request header value.
+ --requestheader-username-headers Required, case-insensitive. Header names to check, in order, for the user identity. The first header containing a value is used as the username.</description>
+    </item>
+    
     <item>
       <title>Establish Android Build Environment Under Fedora 27</title>
       <link>https://dxxzx.github.io/post/fedora_android/</link>
