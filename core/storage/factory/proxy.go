@@ -56,15 +56,34 @@ func (p *proxy) PutContent(path string, content []byte) error {
 	defer p.put(driver)
 	return driver.PutContent(path, content)
 }
+
 func (p *proxy) Reader(path string, offset int64) (io.ReadCloser, error) {
 	driver := p.get()
-	defer p.put(driver)
-	return driver.Reader(path, offset)
+	reader, err := driver.Reader(path, offset)
+	if err != nil {
+		defer p.put(driver)
+		return nil, err
+	}
+	return &proxyReader{
+		proxy:  p,
+		driver: driver,
+		reader: reader,
+	}, nil
 }
+
 func (p *proxy) Writer(path string, append bool) (io.WriteCloser, error) {
 	driver := p.get()
-	defer p.put(driver)
-	return driver.Writer(path, append)
+	writer, err := driver.Writer(path, append)
+	if err != nil {
+		defer p.put(driver)
+		return nil, err
+	}
+
+	return &proxyWriter{
+		proxy:  p,
+		driver: driver,
+		writer: writer,
+	}, nil
 }
 func (p *proxy) Stat(path string) (storage.FileInfo, error) {
 	driver := p.get()
@@ -115,4 +134,34 @@ func Walk(driver storage.Driver, path string, fn storage.WalkFn) error {
 		}
 	}
 	return nil
+}
+
+type proxyReader struct {
+	proxy  *proxy
+	driver storage.Driver
+	reader io.ReadCloser
+}
+
+func (r *proxyReader) Read(p []byte) (n int, err error) {
+	return r.reader.Read(p)
+}
+
+func (r *proxyReader) Close() error {
+	defer r.proxy.put(r.driver)
+	return r.reader.Close()
+}
+
+type proxyWriter struct {
+	proxy  *proxy
+	driver storage.Driver
+	writer io.WriteCloser
+}
+
+func (w *proxyWriter) Write(p []byte) (n int, err error) {
+	return w.writer.Write(p)
+}
+
+func (w *proxyWriter) Close() error {
+	defer w.proxy.put(w.driver)
+	return w.writer.Close()
 }
