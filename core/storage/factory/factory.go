@@ -9,7 +9,7 @@ import (
 
 var (
 	factories = make(map[string]storage.Factory)
-	driver    *Proxy
+	driver    *proxy
 	once      sync.Once
 )
 
@@ -29,7 +29,7 @@ func Create(name string, parameters map[string]interface{}) (storage.Driver, err
 	factory, ok := factories[name]
 	if ok {
 		once.Do(func() {
-			driver = &Proxy{
+			driver = &proxy{
 				drivers: make([]storage.Driver, 8),
 				limit:   32,
 				factory: factory,

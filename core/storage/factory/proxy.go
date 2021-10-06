@@ -6,7 +6,7 @@ import (
 	"github.com/dxxzx/magnifier/core/storage"
 )
 
-type Proxy struct {
+type proxy struct {
 	drivers []storage.Driver
 	limit   int32
 	factory storage.Factory
@@ -14,7 +14,7 @@ type Proxy struct {
 	size    int32
 }
 
-func (p *Proxy) get() storage.Driver {
+func (p *proxy) get() storage.Driver {
 	p.lock <- struct{}{}
 	length := len(p.drivers)
 	driver := p.drivers[length-1]
@@ -24,14 +24,14 @@ func (p *Proxy) get() storage.Driver {
 	return driver
 }
 
-func (p *Proxy) put(driver storage.Driver) {
+func (p *proxy) put(driver storage.Driver) {
 	p.lock <- struct{}{}
 	p.drivers = append(p.drivers, driver)
 	p.size++
 	<-p.lock
 }
 
-func (p *Proxy) tryNew(parameters map[string]interface{}) (storage.Driver, error) {
+func (p *proxy) tryNew(parameters map[string]interface{}) (storage.Driver, error) {
 	p.lock <- struct{}{}
 	if p.size < p.limit || len(p.drivers) == 0 {
 		driver, err := p.factory.Create(parameters)
@@ -46,47 +46,47 @@ func (p *Proxy) tryNew(parameters map[string]interface{}) (storage.Driver, error
 	return p, nil
 }
 
-func (p *Proxy) GetContent(path string) ([]byte, error) {
+func (p *proxy) GetContent(path string) ([]byte, error) {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.GetContent(path)
 }
-func (p *Proxy) PutContent(path string, content []byte) error {
+func (p *proxy) PutContent(path string, content []byte) error {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.PutContent(path, content)
 }
-func (p *Proxy) Reader(path string, offset int64) (io.ReadCloser, error) {
+func (p *proxy) Reader(path string, offset int64) (io.ReadCloser, error) {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.Reader(path, offset)
 }
-func (p *Proxy) Writer(path string, append bool) (io.WriteCloser, error) {
+func (p *proxy) Writer(path string, append bool) (io.WriteCloser, error) {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.Writer(path, append)
 }
-func (p *Proxy) Stat(path string) (storage.FileInfo, error) {
+func (p *proxy) Stat(path string) (storage.FileInfo, error) {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.Stat(path)
 }
-func (p *Proxy) List(path string) ([]string, error) {
+func (p *proxy) List(path string) ([]string, error) {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.List(path)
 }
-func (p *Proxy) Move(sourcePath, destPath string) error {
+func (p *proxy) Move(sourcePath, destPath string) error {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.Move(sourcePath, destPath)
 }
-func (p *Proxy) Delete(path string) error {
+func (p *proxy) Delete(path string) error {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.Delete(path)
 }
-func (p *Proxy) Walk(path string, fn storage.WalkFn) error {
+func (p *proxy) Walk(path string, fn storage.WalkFn) error {
 	driver := p.get()
 	defer p.put(driver)
 	return Walk(driver, path, fn)
