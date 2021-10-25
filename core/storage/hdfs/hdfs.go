@@ -179,7 +179,7 @@ func (d *driver) Delete(path string) error {
 }
 
 func (d *driver) Walk(path string, f storage.WalkFn) error {
-	return nil
+	return factory.Walk(d, path, f)
 }
 
 func closeNoError(closer io.Closer) {
