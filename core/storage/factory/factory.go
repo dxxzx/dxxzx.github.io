@@ -33,7 +33,6 @@ func Create(name string, parameters map[string]interface{}) (storage.Driver, err
 				drivers: make([]storage.Driver, 8),
 				limit:   32,
 				factory: factory,
-				lock:    make(chan struct{}, 1),
 				size:    0,
 			}
 		})

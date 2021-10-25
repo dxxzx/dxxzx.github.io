@@ -2,6 +2,7 @@ package factory
 
 import (
 	"io"
+	"sync"
 
 	"github.com/dxxzx/magnifier/core/storage"
 )
@@ -10,39 +11,38 @@ type proxy struct {
 	drivers []storage.Driver
 	limit   int32
 	factory storage.Factory
-	lock    chan struct{}
+	mutex   sync.Mutex
 	size    int32
 }
 
 func (p *proxy) get() storage.Driver {
-	p.lock <- struct{}{}
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
 	length := len(p.drivers)
 	driver := p.drivers[length-1]
 	p.drivers = p.drivers[:length-1]
 	p.size--
-	<-p.lock
 	return driver
 }
 
 func (p *proxy) put(driver storage.Driver) {
-	p.lock <- struct{}{}
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
 	p.drivers = append(p.drivers, driver)
 	p.size++
-	<-p.lock
 }
 
 func (p *proxy) tryNew(parameters map[string]interface{}) (storage.Driver, error) {
-	p.lock <- struct{}{}
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
 	if p.size < p.limit || len(p.drivers) == 0 {
 		driver, err := p.factory.Create(parameters)
 		if err != nil {
-			<-p.lock
 			return nil, err
 		}
 		p.drivers = append(p.drivers, driver)
 		p.size++
 	}
-	<-p.lock
 	return p, nil
 }
 
