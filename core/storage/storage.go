@@ -15,16 +15,17 @@ package storage
 
 import (
 	"io"
-	"time"
+	"os"
 )
 
 type Driver interface {
 	GetContent(path string) ([]byte, error)
 	PutContent(path string, content []byte) error
 	Reader(path string, offset int64) (io.ReadCloser, error)
-	Writer(path string, append bool) (io.WriteCloser, error)
-	Stat(path string) (FileInfo, error)
-	List(path string) ([]string, error)
+	Writer(path string, flag int, perm os.FileMode) (io.WriteCloser, error)
+	Stat(path string) (os.FileInfo, error)
+	Readdir(subPath string) ([]os.FileInfo, error)
+	Readdirnames(subPath string) ([]string, error)
 	Move(sourcePath, destPath string) error
 	Delete(path string) error
 	Walk(path string, f WalkFn) error
@@ -34,11 +35,4 @@ type Factory interface {
 	Create(params map[string]interface{}) (Driver, error)
 }
 
-type FileInfo interface {
-	Name() string
-	Size() int64
-	ModTime() time.Time
-	IsDir() bool
-}
-
-type WalkFn func(fileInfo FileInfo) error
+type WalkFn func(fileInfo os.FileInfo) error

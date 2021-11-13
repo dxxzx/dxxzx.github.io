@@ -15,6 +15,8 @@ package factory
 
 import (
 	"io"
+	"os"
+	"path"
 	"sync"
 
 	"github.com/dxxzx/magnifier/core/storage"
@@ -76,56 +78,61 @@ func (p *proxy) Reader(path string, offset int64) (io.ReadCloser, error) {
 	return driver.Reader(path, offset)
 }
 
-func (p *proxy) Writer(path string, append bool) (io.WriteCloser, error) {
+func (p *proxy) Writer(path string, flag int, perm os.FileMode) (io.WriteCloser, error) {
 	driver := p.get()
 	defer p.put(driver)
-	return driver.Writer(path, append)
+	return driver.Writer(path, flag, perm)
 }
 
-func (p *proxy) Stat(path string) (storage.FileInfo, error) {
+func (p *proxy) Stat(path string) (os.FileInfo, error) {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.Stat(path)
 }
-func (p *proxy) List(path string) ([]string, error) {
+
+func (p *proxy) Readdir(path string) ([]os.FileInfo, error) {
 	driver := p.get()
 	defer p.put(driver)
-	return driver.List(path)
+	return driver.Readdir(path)
 }
+
+func (p *proxy) Readdirnames(path string) ([]string, error) {
+	driver := p.get()
+	defer p.put(driver)
+	return driver.Readdirnames(path)
+}
+
 func (p *proxy) Move(sourcePath, destPath string) error {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.Move(sourcePath, destPath)
 }
+
 func (p *proxy) Delete(path string) error {
 	driver := p.get()
 	defer p.put(driver)
 	return driver.Delete(path)
 }
+
 func (p *proxy) Walk(path string, fn storage.WalkFn) error {
 	driver := p.get()
 	defer p.put(driver)
 	return Walk(driver, path, fn)
 }
 
-func Walk(driver storage.Driver, path string, fn storage.WalkFn) error {
-	children, err := driver.List(path)
+func Walk(driver storage.Driver, subPath string, fn storage.WalkFn) error {
+	children, err := driver.Readdir(subPath)
 	if err != nil {
 		return err
 	}
 
 	for _, child := range children {
-		fileInfo, err := driver.Stat(child)
-		if err != nil {
-			return nil
-		}
-
-		err = fn(fileInfo)
+		err = fn(child)
 		if err != nil {
 			return err
 		}
-		if fileInfo.IsDir() {
-			if err := Walk(driver, child, fn); err != nil {
+		if child.IsDir() {
+			if err := Walk(driver, path.Join(subPath, child.Name()), fn); err != nil {
 				return err
 			}
 		}

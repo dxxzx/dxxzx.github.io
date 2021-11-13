@@ -2,10 +2,10 @@ package filesystem
 
 import (
 	"fmt"
+	"os"
 	"reflect"
+	"sort"
 	"testing"
-
-	"github.com/dxxzx/magnifier/core/storage"
 )
 
 const (
@@ -62,7 +62,7 @@ func TestStat(t *testing.T) {
 	}
 }
 
-func TestList(t *testing.T) {
+func TestReaddirnames(t *testing.T) {
 	driver := getDriver(t)
 	err := driver.PutContent(testPath1, []byte(testContent))
 	if err != nil {
@@ -76,17 +76,21 @@ func TestList(t *testing.T) {
 	}
 	defer driver.Delete(testPath2)
 
-	results, err := driver.List("")
+	results, err := driver.Readdirnames("")
 	if err != nil {
 		t.Fatal(err)
 	}
 	if len(results) != 2 {
 		t.Fatal("error file count")
 	}
-	if !reflect.DeepEqual(results, []string{testPath1, testPath2}) {
+	expected := []string{testPath1, testPath2}
+	sort.Strings(expected)
+	sort.Strings(results)
+	if !reflect.DeepEqual(results, expected) {
 		t.Fatalf("error result: %v", results)
 	}
 }
+
 func TestMove(t *testing.T) {
 	driver := getDriver(t)
 	err := driver.PutContent(testPath1, []byte(testContent))
@@ -124,7 +128,7 @@ func TestWalk(t *testing.T) {
 	}
 	defer driver.Delete(testPath2)
 
-	driver.Walk("", func(fileInfo storage.FileInfo) error {
+	driver.Walk("", func(fileInfo os.FileInfo) error {
 		fmt.Printf("fileinfo: %#v\n", fileInfo)
 		return nil
 	})

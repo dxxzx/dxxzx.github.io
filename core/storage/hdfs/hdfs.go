@@ -16,6 +16,7 @@ package hdfs
 import (
 	"fmt"
 	"io"
+	"io/fs"
 	"io/ioutil"
 	"os"
 	"path"
@@ -126,20 +127,23 @@ func (d *driver) Reader(subPath string, offset int64) (io.ReadCloser, error) {
 	return reader, nil
 }
 
-func (d *driver) Writer(subPath string, append bool) (io.WriteCloser, error) {
+func (d *driver) Writer(subPath string, flag int, perm fs.FileMode) (io.WriteCloser, error) {
 	realPath := d.fullPath(subPath)
-	if append {
-		return d.client.Append(realPath)
-	}
+	// FIXME: adapt flag
 	return d.client.Create(realPath)
 }
 
-func (d *driver) Stat(subPath string) (storage.FileInfo, error) {
+func (d *driver) Stat(subPath string) (os.FileInfo, error) {
 	realPath := d.fullPath(subPath)
 	return d.client.Stat(realPath)
 }
 
-func (d *driver) List(subPath string) ([]string, error) {
+func (d *driver) Readdir(subPath string) ([]os.FileInfo, error) {
+	realPath := d.fullPath(subPath)
+	return d.client.ReadDir(realPath)
+}
+
+func (d *driver) Readdirnames(subPath string) ([]string, error) {
 	realPath := d.fullPath(subPath)
 	fileInfos, err := d.client.ReadDir(realPath)
 	if err != nil {

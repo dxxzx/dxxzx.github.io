@@ -73,7 +73,7 @@ func (d *driver) GetContent(path string) ([]byte, error) {
 }
 
 func (d *driver) PutContent(path string, content []byte) error {
-	writer, err := d.Writer(path, false)
+	writer, err := d.Writer(path, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
@@ -82,8 +82,14 @@ func (d *driver) PutContent(path string, content []byte) error {
 	return err
 }
 
-func (d *driver) Reader(path string, offset int64) (io.ReadCloser, error) {
-	file, err := os.OpenFile(d.fullPath(path), os.O_RDONLY, 0644)
+func (d *driver) Reader(subPath string, offset int64) (io.ReadCloser, error) {
+	fullPath := d.fullPath(subPath)
+	parent := path.Dir(fullPath)
+
+	if _, err := os.Stat(parent); os.IsNotExist(err) {
+		os.MkdirAll(parent, 0755)
+	}
+	file, err := os.OpenFile(fullPath, os.O_RDONLY, 0644)
 	if err != nil {
 		return nil, err
 	}
@@ -100,36 +106,17 @@ func (d *driver) Reader(path string, offset int64) (io.ReadCloser, error) {
 	return file, nil
 }
 
-func (d *driver) Writer(subPath string, append bool) (io.WriteCloser, error) {
+func (d *driver) Writer(subPath string, flag int, perm os.FileMode) (io.WriteCloser, error) {
 	fullPath := d.fullPath(subPath)
 	parentDir := path.Dir(fullPath)
 	if err := os.MkdirAll(parentDir, 0755); err != nil {
 		return nil, err
 	}
 
-	fp, err := os.OpenFile(fullPath, os.O_WRONLY|os.O_CREATE, 0644)
-	if err != nil {
-		return nil, err
-	}
-
-	if !append {
-		err := fp.Truncate(0)
-		if err != nil {
-			fp.Close()
-			return nil, err
-		}
-	} else {
-		_, err := fp.Seek(0, io.SeekEnd)
-		if err != nil {
-			fp.Close()
-			return nil, err
-		}
-	}
-
-	return fp, nil
+	return os.OpenFile(fullPath, flag, perm)
 }
 
-func (d *driver) Stat(subPath string) (storage.FileInfo, error) {
+func (d *driver) Stat(subPath string) (os.FileInfo, error) {
 	fullPath := d.fullPath(subPath)
 
 	fi, err := os.Stat(fullPath)
@@ -140,7 +127,20 @@ func (d *driver) Stat(subPath string) (storage.FileInfo, error) {
 	return fi, nil
 }
 
-func (d *driver) List(subPath string) ([]string, error) {
+func (d *driver) Readdir(subPath string) ([]os.FileInfo, error) {
+	fullPath := d.fullPath(subPath)
+
+	dir, err := os.Open(fullPath)
+	if err != nil {
+		return nil, err
+	}
+
+	defer dir.Close()
+
+	return dir.Readdir(0)
+}
+
+func (d *driver) Readdirnames(subPath string) ([]string, error) {
 	fullPath := d.fullPath(subPath)
 
 	dir, err := os.Open(fullPath)
@@ -178,6 +178,7 @@ func (d *driver) Move(sourcePath, destPath string) error {
 	err := os.Rename(source, dest)
 	return err
 }
+
 func (d *driver) Delete(subPath string) error {
 	fullPath := d.fullPath(subPath)
 
