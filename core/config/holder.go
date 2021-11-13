@@ -36,8 +36,25 @@ func FromYamlData(raw []byte) error {
 	if err != nil {
 		return err
 	}
-	holder = &impl{data: data}
+	holder = &impl{data: ExpandValueForMap(data)}
 	return nil
+}
+
+// ExpandValueForMap convert all string value.
+func ExpandValueForMap(m map[string]interface{}) map[string]interface{} {
+	for k, v := range m {
+		switch value := v.(type) {
+		case map[string]interface{}:
+			m[k] = ExpandValueForMap(value)
+		case map[interface{}]interface{}:
+			tmp := make(map[string]interface{}, len(value))
+			for k2, v2 := range value {
+				tmp[k2.(string)] = v2
+			}
+			m[k] = ExpandValueForMap(tmp)
+		}
+	}
+	return m
 }
 
 func String(key string) (string, error) {
